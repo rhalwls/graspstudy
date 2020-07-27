@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
@@ -37,9 +38,9 @@ import java.util.LinkedList;
 public class page_mygrass extends Fragment {
 
     int col_num = 6;
-    LinkedList<String> all_date = new LinkedList<String>();//every date representing a small rect(about a half year)
-    LinkedList<String> all_colors = new LinkedList<String>();
-    LinkedList<Integer> all_num_perday = new LinkedList<Integer>();
+    public LinkedList<String> all_date = new LinkedList<String>();//every date representing a small rect(about a half year)
+    public LinkedList<String> all_colors = new LinkedList<String>();
+    private LinkedList<Integer> all_num_perday = new LinkedList<Integer>();
 
     private Context mContext = null;
     private String myID = "noname";
@@ -133,6 +134,11 @@ public class page_mygrass extends Fragment {
         return Integer.parseInt(num3[1]);
     }
     public String MonthArr[] = {"Non","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEPT","OCT","NOV","DEC"};
+    public String DayArr[] = {"MON","TUE","WED","THU","FRI","SAT","SUN"};//length 7
+    public void addDayUI(){
+
+    }
+
 
 
     public void addMonthUI(){
@@ -246,6 +252,28 @@ public class page_mygrass extends Fragment {
                 horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
             }
         });
+
+        Date curDate = new Date();
+
+        horizontalScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                int scrollX = horizontalScrollView.getScrollX(); // For HorizontalScrollView
+                // DO SOMETHING WITH THE SCROLL COORDINATES
+                Log.i("page_mygrass","scroll value : "+scrollX);
+
+
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(curDate);
+                if(scrollX>0) {
+                    cal.add(Calendar.MONTH, (scrollX / 340) - 5);//야매
+                    String scroll_starter_date = formatter.format(cal.getTime());
+                    top_date.setText(scroll_starter_date);
+                }
+
+            }
+        });
         final int halfScreenWidth = (int)(display_width*0.5f);
         Log.e("halfscreen = ",Integer.toString(halfScreenWidth));
         Log.e("tv[col_num].getLeft",Integer.toString(tv[col_num].getLeft()));
@@ -254,7 +282,6 @@ public class page_mygrass extends Fragment {
                 if(col_num>1){
                     col_num--;
                     horizontalScrollView.smoothScrollTo(tv[col_num].getLeft() - halfScreenWidth,0);//스크롤이동
-
 
                     //날짜변환
                     try {
