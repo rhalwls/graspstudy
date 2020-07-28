@@ -1,0 +1,1735 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/내잔디밭"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/left_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:src="@drawable/left">
+
+            </ImageButton>
+
+            <TextView
+                android:id="@+id/selected_date"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="2020년 01월"
+                android:textSize="30dp">
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/right_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:src = "@drawable/right">
+
+            </ImageButton>
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="요일" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="SUN" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="MON" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="TUE" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="WED" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="THU" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="FRI"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="SAT"/>
+            </TableRow>
+
+        </TableLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/내잔디밭_scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/grass_table"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TableRow
+                    android:id="@+id/monthTR"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    <FrameLayout
+                        android:id="@+id/col1row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col1row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col2row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col2row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col3row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col3row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col4row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col4row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col5row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col5row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col6row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col6row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col7row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col7row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col8row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col8row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col9row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col9row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col10row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col10row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col11row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col11row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col12row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col12row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col13row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col13row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col14row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col14row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col15row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col15row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col16row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col16row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col17row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col17row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col18row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col18row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col19row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col19row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col20row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col20row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col21row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col21row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col22row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col22row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col23row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col23row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col24row1_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col24row1"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+                </TableRow>
+
+                <TableRow>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    <FrameLayout
+                        android:id="@+id/col1row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col1row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col2row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col2row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col3row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col3row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col4row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col4row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col5row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col5row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col6row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col6row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col7row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col7row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col8row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col8row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col9row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col9row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col10row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col10row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col11row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col11row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col12row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col12row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col13row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col13row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col14row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col14row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col15row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col15row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col16row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col16row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col17row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col17row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col18row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col18row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col19row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col19row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col20row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col20row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col21row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col21row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col22row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col22row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col23row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col23row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col24row2_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col24row2"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+                </TableRow>
+
+                <TableRow>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    <FrameLayout
+                        android:id="@+id/col1row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col1row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col2row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col2row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col3row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col3row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col4row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col4row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col5row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col5row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col6row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col6row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col7row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col7row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col8row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col8row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col9row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col9row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col10row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col10row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col11row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col11row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col12row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col12row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col13row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col13row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col14row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col14row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col15row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col15row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col16row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col16row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col17row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col17row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col18row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col18row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col19row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col19row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col20row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col20row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col21row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col21row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col22row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col22row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col23row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col23row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col24row3_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col24row3"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+                </TableRow>
+
+                <TableRow>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    <FrameLayout
+                        android:id="@+id/col1row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col1row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col2row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col2row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col3row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col3row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col4row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col4row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col5row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col5row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col6row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col6row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col7row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col7row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col8row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col8row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col9row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col9row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col10row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col10row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col11row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col11row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col12row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col12row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col13row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col13row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col14row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col14row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col15row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col15row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col16row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col16row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col17row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col17row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col18row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col18row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col19row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col19row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col20row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col20row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col21row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col21row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col22row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col22row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col23row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col23row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col24row4_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col24row4"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+                </TableRow>
+
+                <TableRow>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    <FrameLayout
+                        android:id="@+id/col1row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col1row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col2row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col2row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col3row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col3row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col4row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col4row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col5row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col5row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col6row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col6row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col7row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col7row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col8row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col8row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col9row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col9row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col10row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col10row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col11row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col11row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col12row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col12row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col13row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col13row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col14row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col14row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col15row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col15row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col16row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col16row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col17row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col17row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col18row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col18row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col19row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col19row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col20row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col20row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col21row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col21row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col22row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col22row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col23row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col23row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col24row5_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col24row5"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+                </TableRow>
+
+                <TableRow>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    <FrameLayout
+                        android:id="@+id/col1row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col1row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col2row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col2row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col3row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col3row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col4row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col4row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col5row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col5row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col6row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col6row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col7row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col7row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col8row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col8row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col9row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col9row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col10row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col10row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col11row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col11row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col12row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col12row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col13row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col13row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col14row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col14row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col15row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col15row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col16row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col16row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col17row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col17row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col18row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col18row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col19row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col19row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col20row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col20row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col21row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col21row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col22row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col22row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col23row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col23row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col24row6_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col24row6"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+                </TableRow>
+
+                <TableRow>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    <FrameLayout
+                        android:id="@+id/col1row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col1row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col2row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col2row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col3row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col3row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col4row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col4row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col5row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col5row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col6row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col6row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col7row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col7row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col8row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col8row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col9row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col9row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col10row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col10row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col11row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col11row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col12row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col12row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col13row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col13row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col14row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col14row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col15row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col15row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col16row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col16row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col17row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col17row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col18row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col18row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col19row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col19row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col20row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col20row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col21row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col21row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col22row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col22row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col23row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col23row7"
+                            style="@style/grass_box_wrap" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/col24row7_background_Frame"
+                        android:background="#00000000">
+
+                        <Button
+                            android:id="@+id/col24row7"
+                            style="@style/grass_box_wrap" />
+
+                    </FrameLayout>
+                </TableRow>
+
+
+            </TableLayout>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/selectedRectDetail"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:text="클릭한 날의 잔디 수가 나와요" />
+</LinearLayout>
+
+
