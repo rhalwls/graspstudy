@@ -34,18 +34,18 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Vector;
 
-public class page_mygrass extends Fragment {
+public class frag_mygrass extends Fragment {
 
     int col_num = 6;
-    public LinkedList<String> all_date = new LinkedList<String>();//every date representing a small rect(about a half year)
-    public LinkedList<String> all_colors = new LinkedList<String>();
+    protected LinkedList<String> all_date = new LinkedList<String>();//every date representing a small rect(about a half year)
+    protected LinkedList<String> all_colors = new LinkedList<String>();
     private LinkedList<Integer> all_num_perday = new LinkedList<Integer>();
-
-    private Context mContext = null;
-    private String myID = "noname";
+    protected Context mContext = null;
+    protected String myID = "noname";
     private String htmlPageUrl = "https://github.com/" + myID;
-
+    public int ctr = 0;
     private Button textviewHtmlDocument;
 
     private String htmlContentInStringFormat;
@@ -60,56 +60,31 @@ public class page_mygrass extends Fragment {
     View root;
     Button.OnClickListener onClickListener;
     FrameLayout[] tv;
-    public page_mygrass(String myId) {
+    public frag_mygrass(String myId) {
         myID = myId;
     }
-    private static final int numCols = 25;
+    protected static final int numCols = 25;
 
 
-    public void initListener(){
+    protected void initListener(){
         onClickListener = new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String fullDate = (String) view.getTag(R.string.rect_date);
-                int numPerDay = (int) view.getTag(R.string.rect_num);
+                int idx = (int) view.getTag(R.string.rect_idx);
+                int numPerDay = all_num_perday.get(366-idx);
                 TextView dayDetail = (TextView) getActivity().findViewById(R.id.selectedRectDetail);
+                Log.i("frag_mygrass","idx : "+idx+" , allnumperday : "+numPerDay+"all_num_perday size : "+all_num_perday.size());
                 dayDetail.setText(fullDate+" 날에 심은 잔디는 "+numPerDay+" 개 입니다.");
             }
-        } ;
-
+        };
     }
     public void dealWithRects(){
-
         for(int i=2;i<numCols;i++){//왜 i가 2부터 시작하나요......
             for(int j=1;j<=7;j++){
-                String color_temp = all_colors.pollLast();
-                try {
+                //String color_temp = all_colors.pollLast();
+                addDayUI(i,j);
 
-                    String sd = all_date.pollLast();
-                    Date selected_date = git_hub_time_formatter.parse(sd);
-                    int numPerDay = all_num_perday.pollLast();
-                    Log.i("page_mygrass","numperday : "+numPerDay);
-                    String day = day_only.format(selected_date);
-                    int colrowid = R.id.class.getField("col"+(numCols-i)+"row"+(8-j)).getInt(0);
-                    Button colrow = (Button)root.findViewById(colrowid);
-                    //숫자 관련 처리 해주기!!!
-                    colrow.setTag(R.string.rect_date,sd);//store metadata to buttons
-                    colrow.setTag(R.string.rect_num, numPerDay);
-                    colrow.setOnClickListener(onClickListener);
-                    colrow.setBackgroundColor(Color.parseColor(color_temp));
-                    colrow.setText(day);
-                    if(day.equals("01")){
-                        colrow.setTextColor(Color.RED);
-                    }
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                } catch (java.text.ParseException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }
@@ -125,17 +100,44 @@ public class page_mygrass extends Fragment {
         }
         return null;
     }
-    public int getRectDD(Button button){
+    protected int getRectDD(Button button){
         return Integer.parseInt(button.getText().toString());
     }
-    public int getRectMM(Button button){
+    protected int getRectMM(Button button){
         String date = button.getTag(R.string.rect_date).toString();
         String[] num3 = date.split("-");
         return Integer.parseInt(num3[1]);
     }
     public String MonthArr[] = {"Non","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEPT","OCT","NOV","DEC"};
     public String DayArr[] = {"MON","TUE","WED","THU","FRI","SAT","SUN"};//length 7
-    public void addDayUI(){
+    public void addDayUI(int i, int j){//왜 근데 지금 day가 하나씩 차이 나는 잔디모가 있는지 모르겠다
+        //아터님의 경우 18일에 5갠데 6개로 나옴
+        try {
+            String color_temp = all_colors.pollLast();
+            String sd = all_date.pollLast();
+            Date selected_date = git_hub_time_formatter.parse(sd);
+            String day = day_only.format(selected_date);
+            int colrowid = 0;
+            colrowid = R.id.class.getField("col"+(numCols-i)+"row"+(8-j)).getInt(0);
+            Log.i("frag_mygrass","adding col"+(numCols-i)+"row"+(8-j));
+            Button colrow = (Button)root.findViewById(colrowid);
+//숫자 관련 처리 해주기!!!
+            colrow.setTag(R.string.rect_date,sd);//store metadata to buttons
+            colrow.setTag(R.string.rect_idx, ctr);//to access additional data(separate from ui)
+            colrow.setOnClickListener(onClickListener);
+            colrow.setBackgroundColor(Color.parseColor(color_temp));
+            colrow.setText(day);
+            if(day.equals("01")){
+                colrow.setTextColor(Color.RED);
+            }
+            ctr++;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -216,7 +218,7 @@ public class page_mygrass extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.i("for git test","hello world! 1101");
+        Log.i("for git test","hello world! 1114");
         root = inflater.inflate(R.layout.page_mygrass, container, false);
         Log.e("page_mygrass","created");
 
@@ -261,7 +263,7 @@ public class page_mygrass extends Fragment {
             public void onScrollChanged() {
                 int scrollX = horizontalScrollView.getScrollX(); // For HorizontalScrollView
                 // DO SOMETHING WITH THE SCROLL COORDINATES
-                Log.i("page_mygrass","scroll value : "+scrollX);
+                //Log.i("page_mygrass","scroll value : "+scrollX);
 
 
 
@@ -366,7 +368,6 @@ public class page_mygrass extends Fragment {
         long push_block_color_start = System.currentTimeMillis();
         for(int j=1;j<=7-week;j++){//이번주에 대해서 아직 안 온 날들인가?
             try {
-
                 String day = day_only.format(cal.getTime());
                 int colrowid = R.id.class.getField("col24row"+(8-j)).getInt(0);//7~8까지 가능해보이는데?
                 Button colrow =(Button)root.findViewById(colrowid);
@@ -382,45 +383,19 @@ public class page_mygrass extends Fragment {
         //이번주 아직 안온날들 제외
         boolean today = true;
 
-        Button.OnClickListener onClickListener = new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String fullDate = (String) view.getTag(R.string.rect_date);
-                int numPerDay = (int) view.getTag(R.string.rect_num);
-                TextView dayDetail = (TextView) getActivity().findViewById(R.id.selectedRectDetail);
-                dayDetail.setText(fullDate+" 날에 심은 잔디는 "+numPerDay+" 개 입니다.");
-            }
-        } ;
-        for(int j=8-week;j<=7;j++){
-            String color_temp = all_colors.pollLast();
-            try {
-                String sd = all_date.pollLast();
-                Date selected_date = git_hub_time_formatter.parse(sd);
-                String day = day_only.format(selected_date);
-                int numPerDay = all_num_perday.pollLast();
-                int colrowid = R.id.class.getField("col24row"+(8-j)).getInt(0);
 
-                Button colrow = (Button)root.findViewById(colrowid);
-                colrow.setTag(R.string.rect_date,sd);
-                colrow.setTag(R.string.rect_num,numPerDay);
-                colrow.setOnClickListener(onClickListener);
-                colrow.setBackgroundColor(Color.parseColor(color_temp));
-                colrow.setText(day);
-                if(day.equals("01")){
-                    colrow.setTextColor(Color.RED);
-                }
+        for(int j=8-week;j<=7;j++){
+            addDayUI(1,j);
+            try{
                 if(today ==true){
+                    int colrowid = R.id.class.getField("col24row"+(8-j)).getInt(0);
                     View border = (View)root.findViewById(colrowid).getParent();
                     border.setBackgroundColor(Color.BLUE);
                     today = false;
                 }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            } catch (java.text.ParseException e) {
+            } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
