@@ -28,5 +28,5 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="rect_date">rect_date_str</string>
-    <string name="rect_num">rect_num_str</string>
+    <string name="rect_idx">rect_idx_str</string>
 </resources>
