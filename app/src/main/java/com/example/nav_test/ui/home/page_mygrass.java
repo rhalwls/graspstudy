@@ -216,7 +216,7 @@ public class page_mygrass extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.i("for git test","hello world! 1046");
+        Log.i("for git test","hello world! 1101");
         root = inflater.inflate(R.layout.page_mygrass, container, false);
         Log.e("page_mygrass","created");
 
