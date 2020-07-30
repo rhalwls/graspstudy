@@ -62,7 +62,7 @@ public class mygrass extends Fragment {
 
         mTabLayout.addTab(mTabLayout.newTab().setText("내잔디밭"));
         mTabLayout.addTab(mTabLayout.newTab().setText("팀잔디밭"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("새로운잔디밭"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("디파짓(예정)"));
 
 
         viewpager = (ViewPager) root.findViewById((R.id.pager_content));
@@ -75,7 +75,7 @@ public class mygrass extends Fragment {
         pagerAdapter.notifyDataSetChanged();
         viewpager.setAdapter(pagerAdapter);
 
-
+        viewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
