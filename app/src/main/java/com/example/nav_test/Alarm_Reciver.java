@@ -20,10 +20,6 @@ public class Alarm_Reciver extends BroadcastReceiver {
         Log.e("onReceived","correct");
 
 
-
-
-
-
         github_parser date_color_parser = new github_parser();
         Intent service_intent = new Intent(context,BackgroundAlarmService.class);
         Elements dates = null;
@@ -46,8 +42,8 @@ public class Alarm_Reciver extends BroadcastReceiver {
         Log.e("url_deleted_color",url_deleted_color);
 
 
-
-       if(url_deleted_color.equals("#ebedf0")) {
+// 회색이면 startService를 한다. -> 액티비티가 꺼져도 계속 실행되는 이유
+       if(url_deleted_color.equals("#ebedf0")) { // ebedf0 == 회색 -> 즉 commit하지 않았더라면
 
            // TODO: This method is called when the BroadcastReceiver is receiving
            // an Intent broadcast.
@@ -55,7 +51,7 @@ public class Alarm_Reciver extends BroadcastReceiver {
            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                context.startForegroundService(service_intent);
            } else {
-               context.startService(service_intent);
+               context.startService(service_intent); //
            }
        }
     }
