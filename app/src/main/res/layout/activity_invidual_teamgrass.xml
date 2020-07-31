@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#dddddd"
-    tools:context="com.example.nav_test.ui.home.invidual_teamgrass"
+    tools:context="com.example.nav_test.ui.home.individual_teamgrass"
     android:orientation="vertical"
     android:clickable="true">
 

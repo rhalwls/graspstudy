@@ -12,8 +12,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.nav_test.R;
-import com.example.nav_test.ui.home.invidual_teamgrass;
+import com.example.nav_test.ui.home.individual_teamgrass;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,7 +23,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class teamgrass extends Fragment {
-
+    //팀 목록 보여주는 듯
     Context mContext;
 
     String text = "";
@@ -49,7 +48,7 @@ public class teamgrass extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        toTeamgrass = new Intent(this.mContext, invidual_teamgrass.class);
+        toTeamgrass = new Intent(this.mContext, individual_teamgrass.class);
 
 
         loadAllFile(path);

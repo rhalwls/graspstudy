@@ -41,6 +41,7 @@ public class loadingActivity extends Activity {
         startLoading();
     }
 
+
     private void startLoading() {
 
         Handler handler = new Handler();
@@ -50,18 +51,14 @@ public class loadingActivity extends Activity {
                 Elements dates = null;
                 String myname = "";
                 //기존 아이디 가져오기
-                try{
-                    ReadMyName rmn = new ReadMyName(context);
-                    myname = rmn.getMyName();
+                //개인 잔디는 앱 열 때마다 로드하기
+                ReadMyName rmn = new ReadMyName(context);
+                myname = rmn.getMyName();
 
 
                     //Toast.makeText(this, readStr.substring(0, readStr.length()-1), Toast.LENGTH_SHORT).show();
 
-                }catch (FileNotFoundException e){
-                    e.printStackTrace();
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
+                //않이 이미 매일 새로 받아서 저장하고 있는데
                 Log.i("loadingActivity","done reading name again");
                 github_parser date_number_parser = new github_parser(myname);//아이디 메인페이지 방문해 잔디 모판 색깔 확인
                 try {

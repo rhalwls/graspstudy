@@ -32,7 +32,7 @@
         <activity android:name=".loadingActivity">
 
         </activity>
-        <activity android:name=".ui.home.invidual_teamgrass" />
+        <activity android:name=".ui.home.individual_teamgrass" />
 
         <service
             android:name=".BackgroundAlarmService"
