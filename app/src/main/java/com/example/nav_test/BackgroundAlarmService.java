@@ -74,8 +74,8 @@ public class BackgroundAlarmService extends Service {
             noti_manager.notify(1234,notification);
             Log.e("startForeground","true");
 
-            noti_manager.cancel(1234);
-            Log.e("cancelNotification", "true");
+//            noti_manager.cancel(1234);
+//            Log.e("cancelNotification", "true");
 
         }
     }

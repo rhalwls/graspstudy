@@ -124,7 +124,7 @@ public class input_teamgrass extends Fragment {
                     if (!teamname_dir.exists())
                         teamname_dir.mkdirs();
 
-
+                    //Todo : 팀원아이디 입력 부분 파일 저장 파트
                     Log.e("output_file_path", path + "/" + teamname + ".txt");
                     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path + "/" + teamname + ".txt"));
                     // output2 = new FileOutputStream(path+"/team3.txt");
@@ -151,11 +151,7 @@ public class input_teamgrass extends Fragment {
                     image_added.buildDrawingCache();
                     Bitmap bitmap = image_added.getDrawingCache();
                     saveBitmapTojpeg(bitmap,teamname);
-
                 }
-
-
-
 
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction trans;

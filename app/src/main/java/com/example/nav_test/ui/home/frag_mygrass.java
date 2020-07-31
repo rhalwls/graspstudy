@@ -39,10 +39,10 @@ import java.util.Vector;
 public class frag_mygrass extends Fragment {
 
     int col_num = 6;
-    protected LinkedList<String> all_date = new LinkedList<String>();//every date representing a small rect(about a half year)
-    protected LinkedList<String> all_colors = new LinkedList<String>();
-    private LinkedList<Integer> all_num_perday = new LinkedList<Integer>();
-    protected Context mContext = null;
+    protected LinkedList<String> all_date = new LinkedList<String>();//every date representing a small rect(about a half year) // github의 잔디날짜를 파싱
+    protected LinkedList<String> all_colors = new LinkedList<String>(); // rgb color
+    private LinkedList<Integer> all_num_perday = new LinkedList<Integer>(); // commit 횟수
+    protected Context mContext = null; // activity 상황
     protected String myID = "noname";
     private String htmlPageUrl = "https://github.com/" + myID;
     public int ctr = 0;

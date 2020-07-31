@@ -15,9 +15,11 @@ import androidx.fragment.app.Fragment;
 import com.example.nav_test.R;
 import com.example.nav_test.ui.home.invidual_teamgrass;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -79,6 +81,29 @@ public class teamgrass extends Fragment {
         //Team_title.setBackgroundResource(R.color.colorPrimaryDark);
 
         teamgrass_block.addView(Team_title);
+
+        final TextView team_detail = new TextView(mContext.getApplicationContext());
+        String path = requireContext().getFilesDir().getPath() + File.separator + "teamname";
+        File file = new File(path) ;
+        FileReader fr = null ;
+        BufferedReader bufrd = null ;
+        String line = null;
+        try {
+            // open file.
+            fr = new FileReader(file) ;
+            bufrd = new BufferedReader(fr) ;
+
+            while ((line=bufrd.readLine())!=null) {
+                team_detail.setText(line);
+                team_detail.setText("\n");
+            }
+
+            // close file.
+            bufrd.close() ;
+            fr.close() ;
+        } catch (Exception e) {
+            e.printStackTrace() ;
+        }
 
 
 

@@ -34,21 +34,19 @@ public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerVie
     }
 
 
-
-
-
-
-
     public class ViewHolder0 extends RecyclerView.ViewHolder{
         TextView title;
         ImageView image;
         Button delete;
+        TextView detail;
+
 
         ViewHolder0(View itemView){
             super(itemView);
             delete = itemView.findViewById(R.id.team_delete_button);
             title = itemView.findViewById(R.id.team_title);//수정 필요!
             image = itemView.findViewById(R.id.recycler_imageview);
+            detail = itemView.findViewById(R.id.team_detail);
 
             delete.setOnClickListener(new Button.OnClickListener(){
                 @Override
@@ -111,9 +109,6 @@ public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerVie
         else
             return 0;
     }
-
-
-
 
 
     @Override
