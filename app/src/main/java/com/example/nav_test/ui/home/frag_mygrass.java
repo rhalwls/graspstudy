@@ -72,9 +72,9 @@ public class frag_mygrass extends Fragment {
             public void onClick(View view) {
                 String fullDate = (String) view.getTag(R.string.rect_date);
                 int idx = (int) view.getTag(R.string.rect_idx);
-                int numPerDay = all_num_perday.get(366-idx);
+                int numPerDay = all_num_perday.get(all_num_perday.size()-1-idx);
                 TextView dayDetail = (TextView) getActivity().findViewById(R.id.selectedRectDetail);
-                Log.i("frag_mygrass","idx : "+idx+" , allnumperday : "+numPerDay+"all_num_perday size : "+all_num_perday.size());
+                Log.i("frag_mygrass","idx : "+idx+" , allnumperday : "+numPerDay+" all_num_perday size : "+all_num_perday.size());
                 dayDetail.setText(fullDate+" 날에 심은 잔디는 "+numPerDay+" 개 입니다.");
             }
         };
@@ -84,7 +84,6 @@ public class frag_mygrass extends Fragment {
             for(int j=1;j<=7;j++){
                 //String color_temp = all_colors.pollLast();
                 addDayUI(i,j);
-
             }
         }
     }
@@ -121,7 +120,7 @@ public class frag_mygrass extends Fragment {
             colrowid = R.id.class.getField("col"+(numCols-i)+"row"+(8-j)).getInt(0);
             Log.i("frag_mygrass","adding col"+(numCols-i)+"row"+(8-j));
             Button colrow = (Button)root.findViewById(colrowid);
-//숫자 관련 처리 해주기!!!
+            //숫자 관련 처리 해주기!!!
             colrow.setTag(R.string.rect_date,sd);//store metadata to buttons
             colrow.setTag(R.string.rect_idx, ctr);//to access additional data(separate from ui)
             colrow.setOnClickListener(onClickListener);
@@ -144,11 +143,7 @@ public class frag_mygrass extends Fragment {
 
 
     public void addMonthUI(){
-        /*
-        tv[3].setBackgroundColor(getResources().getColor(R.color.colorBlue));
-        tv[5].setBackgroundColor(getResources().getColor(R.color.colorBlue));
 
-        */
         TableRow monthtr = root.findViewById(R.id.monthTR);
         Log.i("page_mygrass","const col_num = "+col_num);
         for(int i =1;i<numCols;i++){
@@ -176,7 +171,7 @@ public class frag_mygrass extends Fragment {
 
         String path = requireContext().getFilesDir().getPath();
         Log.e("receive path",path);
-        File file = new File(path+"/myGrassData.txt");
+        File file = new File(path+"/myGrassData.txt"); //읽어오고잇슴
 
         long start = System.currentTimeMillis();
         initListener();
@@ -186,7 +181,6 @@ public class frag_mygrass extends Fragment {
             FileReader fileReader = new FileReader(file);
             //Log.e("save","1");
             BufferedReader bufferedReader =new BufferedReader(fileReader);
-            //Log.e("save","2");
             String line= "";
             //Log.e("save","3");
             while((line = bufferedReader.readLine())!=null) { //왜 읽는 것일까
@@ -210,7 +204,7 @@ public class frag_mygrass extends Fragment {
         }
         long end = System.currentTimeMillis();
         Log.d("timecheck","oncreate"+(end-start));
-
+        Log.i("frag_mygrass","# of 3 components : "+all_date.size()+" , "+ all_colors.size()+" , "+all_num_perday.size());
 
     }
 
@@ -384,7 +378,7 @@ public class frag_mygrass extends Fragment {
         boolean today = true;
 
 
-        for(int j=8-week;j<=7;j++){
+        for(int j=8-week;j<=7;j++){//이번주 이미 지나간 날들 오늘 포함
             addDayUI(1,j);
             try{
                 if(today ==true){
@@ -408,7 +402,7 @@ public class frag_mygrass extends Fragment {
         long push_block_color_end = System.currentTimeMillis();
 
         Log.d("timecheck","time:" +(push_block_color_end-push_block_color_start));
-
+        Log.i("frag_mygrass","idx 13 // 7/18 : "+all_num_perday.get(all_num_perday.size()-1-13));
 
         return root;
     }

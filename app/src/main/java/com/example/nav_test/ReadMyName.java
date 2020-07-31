@@ -9,21 +9,22 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class ReadMyName {
-    final String myname;
-    public ReadMyName(Context context) throws FileNotFoundException {
-        BufferedReader br = new BufferedReader(new FileReader(context.getCacheDir()+"/myname.txt"));
-        String readStr = "";
+    public String myname;
+    public ReadMyName(Context context)  {
+
         try {
+            BufferedReader br = new BufferedReader(new FileReader(context.getCacheDir()+"/myname.txt"));
+            String readStr = "";
             readStr = br.readLine();
             Log.i("loadingActivity ", "my name I read is "+readStr);
             br.close();
+            myname=readStr;
         }
         catch (IOException e){
-            readStr = "ioexception";
+            myname = "ioexception";
         }
-        myname = readStr;
     }
-    public final String getMyName(){
+    public String getMyName(){
         return myname;
     }
 }

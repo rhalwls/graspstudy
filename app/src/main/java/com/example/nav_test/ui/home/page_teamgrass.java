@@ -6,38 +6,22 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
-import com.example.nav_test.MainActivity;
 import com.example.nav_test.R;
-import com.google.android.gms.tasks.Tasks;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.nav_test.ReadMyName;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -69,6 +53,7 @@ public class page_teamgrass extends Fragment {
         // Required empty public constructor
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +66,7 @@ public class page_teamgrass extends Fragment {
             if(!teamname_dir.exists())
                 teamname_dir.mkdirs();
 
-        toTeamgrass = new Intent(requireContext(), invidual_teamgrass.class);
+        toTeamgrass = new Intent(requireContext(), individual_teamgrass.class);
 
         toInputgrass = new Intent(requireContext(),input_teamgrass.class);
 
@@ -221,7 +206,7 @@ public class page_teamgrass extends Fragment {
                     Bundle args = new Bundle();
                     String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));
                     args.putString("selected_team_name", txt_removed_teamname);
-                    fragment = new invidual_teamgrass();
+                    fragment = new individual_teamgrass(new ReadMyName(mContext).getMyName());
                     fragment.setArguments(args);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
