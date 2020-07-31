@@ -23,12 +23,6 @@ import java.util.concurrent.ExecutionException;
 
 public class BackgroundAlarmService extends Service {
 
-
-
-
-
-
-
     private IBinder mIBinder = new MyBinder();
 
     public int var = 777;
@@ -46,23 +40,14 @@ public class BackgroundAlarmService extends Service {
         Log.e("onbind","true");
         return mIBinder;
         // TODO: Return the communication channel to the service.
-
     }
-
     @Override
     public void onCreate() {
-
-
-
         Log.e("backgroundAlarmService","true");
-
         super.onCreate();
-
         if (Build.VERSION.SDK_INT >= 26 ) {
 
             NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-
-
 
             Log.e("build_ver",Build.VERSION.SDK);
             String CHANNEL_ID = "default";
@@ -74,9 +59,8 @@ public class BackgroundAlarmService extends Service {
 
             noti_manager.createNotificationChannel(channel);
 
-            PendingIntent contentIntent = PendingIntent.getActivity(this, 0,new Intent (this,loadingActivity.class),0);
-
-
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent (this,loadingActivity.class),0);
+// 알람 누르면 loadingActivity 실행
 
             Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setContentTitle("아직 오늘의 잔디밭을 채우지 못하셨습니다!")
@@ -84,11 +68,14 @@ public class BackgroundAlarmService extends Service {
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setDefaults(Notification.DEFAULT_VIBRATE).setAutoCancel(true)
                     .setContentIntent(contentIntent)
+                    .setAutoCancel(true)
                     .build();
             startForeground(1,notification);
             noti_manager.notify(1234,notification);
             Log.e("startForeground","true");
 
+            noti_manager.cancel(1234);
+            Log.e("cancelNotification", "true");
 
         }
     }
