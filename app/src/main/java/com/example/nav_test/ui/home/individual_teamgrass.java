@@ -43,14 +43,14 @@ public class individual_teamgrass extends frag_mygrass {
         path = requireContext().getFilesDir().getPath()+File.separator+"teamname";
 
 
-    }
+    } // 변경
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                      Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root =  inflater.inflate(R.layout.activity_invidual_teamgrass, container, false);
+        View root =  inflater.inflate(R.layout.fragment_grass, container, false);
 
 
 

@@ -71,7 +71,7 @@ public class frag_mygrass extends Fragment {
             @Override
             public void onClick(View view) {
                 String fullDate = (String) view.getTag(R.string.rect_date);
-                int idx = (int) view.getTag(R.string.rect_idx);
+                int idx = (int) view.getTag(R.string.rect_idx); // tag 검색해서 알아보기
                 int numPerDay = all_num_perday.get(all_num_perday.size()-1-idx);
                 TextView dayDetail = (TextView) getActivity().findViewById(R.id.selectedRectDetail);
                 Log.i("frag_mygrass","idx : "+idx+" , allnumperday : "+numPerDay+" all_num_perday size : "+all_num_perday.size());
@@ -80,7 +80,7 @@ public class frag_mygrass extends Fragment {
         };
     }
     public void dealWithRects(){
-        for(int i=2;i<numCols;i++){//왜 i가 2부터 시작하나요......
+        for(int i=2;i<numCols;i++){//왜 i가 2부터 시작하나요...... // 인덱스1은 이번주(처리해야할게 있음)
             for(int j=1;j<=7;j++){
                 //String color_temp = all_colors.pollLast();
                 addDayUI(i,j);
@@ -89,8 +89,8 @@ public class frag_mygrass extends Fragment {
     }
     public Button getRectByColRow(int c, int r){
         try {
-            int colrowid = R.id.class.getField("col" + c + "row" + r).getInt(0);
-            Button colrow =(Button)root.findViewById(colrowid);
+            int colrowid = R.id.class.getField("col" + c + "row" + r).getInt(0); // getField 찾아보기
+            Button colrow =(Button)root.findViewById(colrowid); // R.ajtllsdjl fjao
             return colrow;
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -100,10 +100,10 @@ public class frag_mygrass extends Fragment {
         return null;
     }
     protected int getRectDD(Button button){
-        return Integer.parseInt(button.getText().toString());
+        return Integer.parseInt(button.getText().toString()); // 버튼에 써져있는 일 가져오기
     }
     protected int getRectMM(Button button){
-        String date = button.getTag(R.string.rect_date).toString();
+        String date = button.getTag(R.string.rect_date).toString(); // 메타데이터에서 월 뽑아오기
         String[] num3 = date.split("-");
         return Integer.parseInt(num3[1]);
     }
@@ -142,7 +142,7 @@ public class frag_mygrass extends Fragment {
 
 
 
-    public void addMonthUI(){
+    public void addMonthUI(){ // 1
 
         TableRow monthtr = root.findViewById(R.id.monthTR);
         Log.i("page_mygrass","const col_num = "+col_num);
@@ -152,7 +152,7 @@ public class frag_mygrass extends Fragment {
             int repday = getRectDD(rect);
             monthtr.addView(tv);
             Log.i("page_mygrass","adding a month view(empty or valid) and repday : " +repday);
-            if(repday<=7||i ==1){
+            if(repday<=7||i ==1){ //7보다 낮은 날짜면 월이 바뀜
                 int repmonth = getRectMM(rect);
                 tv.setText(MonthArr[repmonth]);
                 Log.i("page_mygrass","intend to add month mark");
