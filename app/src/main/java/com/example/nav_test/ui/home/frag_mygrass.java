@@ -63,18 +63,18 @@ public class frag_mygrass extends Fragment {
     public frag_mygrass(String myId) {
         myID = myId;
     }
-    protected static final int numCols = 25;
+    protected static final int numCols = 25; // 한 row에 25개 1 2 3 4~25
 
 
-    protected void initListener(){
+    protected void initListener(){ // 잔디 누르면 밑에 text 뜨는 리스너
         onClickListener = new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fullDate = (String) view.getTag(R.string.rect_date);
-                int idx = (int) view.getTag(R.string.rect_idx); // tag 검색해서 알아보기
+                String fullDate = (String) view.getTag(R.string.rect_date); // rect_date 키를 통해 sd 반환(selected date)
+                int idx = (int) view.getTag(R.string.rect_idx); // tag 검색해서 알아보기 -> rect_idx로 cnt 반환
                 int numPerDay = all_num_perday.get(all_num_perday.size()-1-idx);
                 TextView dayDetail = (TextView) getActivity().findViewById(R.id.selectedRectDetail);
-                Log.i("frag_mygrass","idx : "+idx+" , allnumperday : "+numPerDay+" all_num_perday size : "+all_num_perday.size());
+                Log.i("frag_mygrass","idx : "+idx+" 00, allnumperday : "+numPerDay+" all_num_perday size : "+all_num_perday.size());
                 dayDetail.setText(fullDate+" 날에 심은 잔디는 "+numPerDay+" 개 입니다.");
             }
         };
@@ -87,7 +87,7 @@ public class frag_mygrass extends Fragment {
             }
         }
     }
-    public Button getRectByColRow(int c, int r){
+    public Button getRectByColRow(int c, int r){ // colrow를 파라미터로 Button colrow 가져오기.
         try {
             int colrowid = R.id.class.getField("col" + c + "row" + r).getInt(0); // getField 찾아보기
             Button colrow =(Button)root.findViewById(colrowid); // R.ajtllsdjl fjao
@@ -100,7 +100,7 @@ public class frag_mygrass extends Fragment {
         return null;
     }
     protected int getRectDD(Button button){
-        return Integer.parseInt(button.getText().toString()); // 버튼에 써져있는 일 가져오기
+        return Integer.parseInt(button.getText().toString()); // 버튼에 써져있는 일자 가져오기
     }
     protected int getRectMM(Button button){
         String date = button.getTag(R.string.rect_date).toString(); // 메타데이터에서 월 뽑아오기
@@ -112,16 +112,16 @@ public class frag_mygrass extends Fragment {
     public void addDayUI(int i, int j){//왜 근데 지금 day가 하나씩 차이 나는 잔디모가 있는지 모르겠다
         //아터님의 경우 18일에 5갠데 6개로 나옴
         try {
-            String color_temp = all_colors.pollLast();
-            String sd = all_date.pollLast();
-            Date selected_date = git_hub_time_formatter.parse(sd);
-            String day = day_only.format(selected_date);
+            String color_temp = all_colors.pollLast(); // 링크드리스트에서 마지막요소를 반환하면서 제거.
+            String sd = all_date.pollLast(); // selected date
+            Date selected_date = git_hub_time_formatter.parse(sd); // yyyy-mm-dd
+            String day = day_only.format(selected_date);//selected_dates에서 day만 뽑아오기.
             int colrowid = 0;
             colrowid = R.id.class.getField("col"+(numCols-i)+"row"+(8-j)).getInt(0);
             Log.i("frag_mygrass","adding col"+(numCols-i)+"row"+(8-j));
             Button colrow = (Button)root.findViewById(colrowid);
             //숫자 관련 처리 해주기!!!
-            colrow.setTag(R.string.rect_date,sd);//store metadata to buttons
+            colrow.setTag(R.string.rect_date,sd);//store metadata to buttons // colrow에 R.string.rect_date라는 항목을 만들고 그것의 value는 sd이다.
             colrow.setTag(R.string.rect_idx, ctr);//to access additional data(separate from ui)
             colrow.setOnClickListener(onClickListener);
             colrow.setBackgroundColor(Color.parseColor(color_temp));
