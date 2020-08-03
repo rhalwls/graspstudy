@@ -27,11 +27,11 @@ public class individual_teamgrass extends frag_mygrass {
 
     public LinkedList<Integer>[] numMemberPerDay;
 
-
+    public individual_teamgrass(){
+        super("noname");
+    }
     public individual_teamgrass(String myid){
         super(myid);
-
-
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {

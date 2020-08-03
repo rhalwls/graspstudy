@@ -22,12 +22,15 @@ import com.example.nav_test.R;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<String> mData = null;
 
     int max;
+
+    Context mContext;
 
     public String getmData(int pos) {
         return mData.get(pos);
@@ -97,8 +100,9 @@ public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerVie
         }
     }
 
-    team_recycler_view_adapter(ArrayList<String> list){
+    team_recycler_view_adapter(ArrayList<String> list,Context context){
         mData = list;
+        mContext=context;
     }
 
     @Override
@@ -137,15 +141,37 @@ public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerVie
         return vh2;
     }
 
+    public void setDetailAsMembers(ViewHolder0 viewHolder0 , String teamName){
+        Team team = new Team(teamName);
+        ArrayList<String> teamMembers = team.loadTeamMembers(mContext);
+        int team_size = teamMembers.size();
+        String detailStr = "";
+        Iterator<String> it=teamMembers.iterator();
+        String member;
+        int ctr = 0;
+        while(it.hasNext()&&ctr<3){
+            member = it.next();
+            Log.i("team_recycler_view_adapter","reading a team member #"+ctr+" , "+member);
+            detailStr+=member+"\n";
+            ctr++;
+        }
+        detailStr+="멤버 수 : "+team_size;
+
+        viewHolder0.detail.setText(detailStr);
+    }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()){
+            //지금 이거 case 가 뭔지 모르겟슴
+
             case 0:
                 ViewHolder0 viewHolder0 = (ViewHolder0)holder;
-                String teamname = mData.get(position);
+                String teamname = mData.get(position); //team name 받음
                 String txt_removed_teamname = teamname.substring(0, teamname.lastIndexOf("."));
 
                 viewHolder0.title.setText(txt_removed_teamname);
+                setDetailAsMembers(viewHolder0, txt_removed_teamname);
+
 
                 File file = new File("/data/data/com.example.nav_test/cache/"+txt_removed_teamname+".jpg" );
 

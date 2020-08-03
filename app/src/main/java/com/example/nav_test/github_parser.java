@@ -11,8 +11,10 @@ import org.jsoup.select.Elements;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -75,5 +77,26 @@ public class github_parser extends AsyncTask<Void, Void, Elements> {
     }
 
 
+
+
+
+    //function below hasn't implemented yet
+    /*
+    public LinkedList<Integer> retLinkedListNum(){// returns only a linked list of numbers per day
+        LinkedList<Integer> numPerDay;
+        for (Element date : dates) {
+            String raw_date = date.attr("abs:data-date");
+            String raw_color = date.attr("abs:fill");
+            String raw_num_perday = date.attr("abs:data-count");
+            int color_idx = raw_color.indexOf("#");
+            //Log.i("mj loadingActivity", raw_date+" , "+raw_color+" , "+raw_num_perday);
+            String url_refined_date = raw_date.substring(19);//날짜 시작 위치 찾기 위해 2019년과는 관련 없음
+            String url_refined_color = raw_color.substring(color_idx);
+            String url_refined_num_perday = raw_num_perday.substring(19);
+            numPerDay.add(r)
+        }
+
+        }
+    */
 
 }

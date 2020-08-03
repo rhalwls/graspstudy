@@ -34,14 +34,8 @@
         </activity>
         <activity android:name=".ui.home.individual_teamgrass" />
 
-        <service
-            android:name=".BackgroundAlarmService"
-            android:enabled="true" />
-
         <receiver
-            android:name=".Alarm_Reciver"
-            android:enabled="true"
-            android:exported="true" />
+            android:name=".NotificationReceiver"></receiver>
     </application>
 
 </manifest>

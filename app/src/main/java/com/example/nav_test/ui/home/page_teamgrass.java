@@ -90,43 +90,17 @@ public class page_teamgrass extends Fragment {
             for (int i = 0; i < fileArray_length; i++) {
                 Log.e("filename",fileArray[i].getName());
                 temp_array.add(fileArray[i].getName());
-                //all_file_string[i] = fileArray[i].getName();
-                //createlayout(fileArray[i].getName());
+
             }
         }
         temp_array.add("this is for add button");
 
         all_file_array.clear();
         all_file_array.addAll(temp_array);
-
-
-
-
     }
 
 
-            /*    Log.e("teamTitle.getText()", Team_title.getText().toString());
-                toTeamgrass.putExtra("selected_team_name", Team_title.getText().toString());
-                mContext.startActivity(toTeamgrass);
-                fab.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View view) {
-                                               Fragment fragment = new input_teamgrass();
-                                               FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                               FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                               fragmentTransaction.replace(R.id.drawer_layout,fragment);
-                                               fragmentTransaction.addToBackStack(null);
-                                               fragmentTransaction.commit();
 
-
-
-
-                                           }
-        }
-
-        );
-        return teamgrass_block;
-    }*/
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
@@ -135,17 +109,11 @@ public class page_teamgrass extends Fragment {
 
         Log.e("file_length",Integer.toString(fileArray_length));
 
-        /*for(int i=0;i<fileArray_length;i++){
-            Log.e("block_name",all_file_string[i]);
-            ((LinearLayout)root.findViewById(R.id.teamgrass_scrollview_layout)).addView(createlayout(all_file_string[i]));
-            Log.e("each block","created");
-        }*/
-
         final RecyclerView recyclerView = root.findViewById(R.id.teamgrass_recyclerview);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
 
-        final team_recycler_view_adapter adapter = new team_recycler_view_adapter(all_file_array);
+        final team_recycler_view_adapter adapter = new team_recycler_view_adapter(all_file_array,mContext);
 
         adapter.setOnItemClickListener(new team_recycler_view_adapter.OnItemClickListener(){
             @Override
@@ -246,27 +214,6 @@ public class page_teamgrass extends Fragment {
 
 
         Log.e("all block","created");
-        //((LinearLayout)root.findViewById(R.id.teamgrass_scrollview_layout)).setLayoutParams(new ScrollView.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        //((ScrollView)root.findViewById(R.id.teamgrass_scrollview));//setLayoutParams(new LinearLayoutCompat.LayoutParams(ScrollView.LayoutParams.MATCH_PARENT, ScrollView.LayoutParams.MATCH_PARENT));
-        //root.findViewById(R.id.teamgrass_scrollview).invalidate();
-
-        //FloatingActionButton fab = root.findViewById(R.id.button_on_teamgrass);
-
-
-        /*fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new input_teamgrass();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.drawer_layout,fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-
-
-            }
-        });*///버블
-        //((LinearLayout)root.findViewById(R.id.teamgrass_scrollview_layout)).addView(fab);
         Log.e("bubble","created");
         return root;
     }

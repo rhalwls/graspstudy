@@ -26,8 +26,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
@@ -40,6 +42,7 @@ public class loadingActivity extends Activity {
 
         startLoading();
     }
+
 
 
     private void startLoading() {
@@ -56,7 +59,7 @@ public class loadingActivity extends Activity {
                 myname = rmn.getMyName();
 
 
-                    //Toast.makeText(this, readStr.substring(0, readStr.length()-1), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, readStr.substring(0, readStr.length()-1), Toast.LENGTH_SHORT).show();
 
                 //않이 이미 매일 새로 받아서 저장하고 있는데
                 Log.i("loadingActivity","done reading name again");
@@ -115,8 +118,7 @@ public class loadingActivity extends Activity {
                     e.printStackTrace();
                 }
 
-
-                set_background_alarm();
+                myAlarm();
 
                 Intent main = new Intent(loadingActivity.this,MainActivity.class);
                 startActivity(main);
@@ -126,38 +128,25 @@ public class loadingActivity extends Activity {
         },2000);//2초가 무슨의미..?
     }
 
-    private void set_background_alarm(){ //무슨 알람인지..?
-        AlarmManager alarmManager;
-        PendingIntent pendingIntent;
 
-        alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        Intent alarm_reciver_Intent = new Intent(loadingActivity.this,Alarm_Reciver.class);
+    public void myAlarm() {
 
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-hh-mm");
+        Log.i("loading_activity","alarm time set currently : "+formatter.format(calendar.getTime()));
+        if (calendar.getTime().compareTo(new Date()) < 0)
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
 
+        Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        pendingIntent = PendingIntent.getBroadcast(loadingActivity.this,0,alarm_reciver_Intent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String day = dayFormat.format(currentTime);
-        Date date;
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd").parse(day);
-            Calendar current = Calendar.getInstance();
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            cal.add(Calendar.HOUR,21);
-            if(current.compareTo(cal) == -1){
-                alarmManager.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+(2000),pendingIntent);
-            }
-            alarmManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),pendingIntent);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if (alarmManager != null) {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+            Log.i("loading_activity","alarm manager not null set repeat");
         }
-        Toast.makeText(this,"alarm set after"+1+"second",Toast.LENGTH_LONG).show();//무슨 알람일까?
 
     }
-
 
 
 }
