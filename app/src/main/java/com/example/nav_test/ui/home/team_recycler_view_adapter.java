@@ -44,7 +44,7 @@ public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerVie
         TextView detail;
 
 
-        ViewHolder0(View itemView){
+        ViewHolder0(View itemView){ // 화면에 표시될 아이템뷰를 저장해주는 객체
             super(itemView);
             delete = itemView.findViewById(R.id.team_delete_button);
             title = itemView.findViewById(R.id.team_title);//수정 필요!
@@ -79,7 +79,7 @@ public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerVie
         }
     }
     public class ViewHolder2 extends RecyclerView.ViewHolder{
-        FrameLayout new_teamgrass;
+        FrameLayout new_teamgrass; // 새로운 팀을 추가하세요
         ViewHolder2(View itemView){
             super(itemView);
 

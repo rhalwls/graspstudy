@@ -127,7 +127,7 @@ public class page_teamgrass extends Fragment {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.add(R.id.drawer_layout, fragment);
+                    fragmentTransaction.add(R.id.drawer_layout, fragment); // 네비게이션바
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
 
