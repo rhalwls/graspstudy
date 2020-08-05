@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/내잔디밭"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:id="@+id/grass_calandar"
+        style="@style/grass_calandar">
 
     <LinearLayout
             android:layout_width="match_parent"

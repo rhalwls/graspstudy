@@ -11,7 +11,9 @@ import com.example.nav_test.ui.github_parser_imageURL;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+
 import android.text.TextUtils;
+
 import android.util.Log;
 import android.view.View;
 
@@ -69,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         */
 
 //alarm end
+
+        Log.i("MainActivity","right before searching toolbar");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

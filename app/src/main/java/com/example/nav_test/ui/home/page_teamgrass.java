@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class page_teamgrass extends Fragment {
 
     Fragment thisfrag = this;
-
+    tabPagerAdapter pagerAdapter;
 
     String path;
     ArrayList<String> all_file_array = new ArrayList<>();
@@ -51,6 +51,9 @@ public class page_teamgrass extends Fragment {
     Context mContext;
     public page_teamgrass() {
         // Required empty public constructor
+    }
+    public page_teamgrass(tabPagerAdapter adapter) {
+        pagerAdapter = adapter;
     }
 
 
@@ -174,13 +177,26 @@ public class page_teamgrass extends Fragment {
                     Bundle args = new Bundle();
                     String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));
                     args.putString("selected_team_name", txt_removed_teamname);
-                    fragment = new individual_teamgrass(new ReadMyName(mContext).getMyName());
+                    /*
+                    fragment = new individual_teamgrass(new ReadMyName(mContext).getMyName(),page_teamgrass.this);
+
                     fragment.setArguments(args);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.drawer_layout, fragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
+
+                     */
+                    Team team = new Team(txt_removed_teamname);
+                    team.loadTeamMembers(mContext);
+
+                    Intent intent = new Intent(
+                            mContext, // 현재 화면의 제어권자
+                            TeamActivity.class); // 다음 넘어갈 클래스 지정
+
+                    intent.putExtra("teamObj",team);
+                    startActivity(intent); // 다음 화면으로 넘어간다
                 }
 
             }

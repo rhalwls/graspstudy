@@ -7,15 +7,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Team {
+public class Team implements Serializable {
     public String team_name;
     public ArrayList<String> members;//멤버 별로 인덱스를 가짐
 
     public Team(String tn){
         team_name= tn;
+
     }
     //파일에서 멤버들 읽어오기
     public ArrayList<String> loadTeamMembers(Context context){
@@ -37,4 +39,11 @@ public class Team {
         members = tempMembers;
         return members;
     }
+    /*
+    public boolean storeTeamFile(Context context){
+        //need to implement later
+
+        return true;
+    }
+    */
 }
