@@ -8,9 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+import com.google.android.material.navigation.NavigationView;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -40,6 +45,8 @@ public class loadingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
+
+
         startLoading();
     }
 
@@ -66,6 +73,8 @@ public class loadingActivity extends Activity {
                 github_parser date_number_parser = new github_parser(myname);//아이디 메인페이지 방문해 잔디 모판 색깔 확인
                 try {
                     dates = date_number_parser.execute().get();
+
+
                     Log.i("loadingActivity","why perser.exe.get doesn't work??");
                     Log.i("loadingActivity","dates.text() : \n"+dates.text());
                     Log.i("loadingActivity","dates.html() : \n"+dates.html());
