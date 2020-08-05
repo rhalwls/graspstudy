@@ -42,8 +42,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class input_teamgrass extends Fragment {
+public class input_teamgrass extends Fragment{
     Context context = getContext();
+
+    private static final String TAG = "beomgeun";
+    private Boolean isPermission = true;
 
     File temp_imageFile;
 
@@ -94,7 +97,7 @@ public class input_teamgrass extends Fragment {
 
             @Override
             public void onClick(View v) {
-                goToAlbum();
+                if(isPermission) goToAlbum();
             }
         });
 
@@ -184,42 +187,38 @@ public class input_teamgrass extends Fragment {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent, PICK_FROM_ALBUM);
-    }
-
+    } // intent를 통해 앨범화면으로 넘어간다. startActivitForResult에
+    //PICK_FROM_ALBUM 변수 넣어줌.
+    //onActivityResult에서 requestCode로 반환되는 값
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PICK_FROM_ALBUM) {
-            Uri photoUri = data.getData();
+        super.onActivityResult(requestCode, resultCode, data);
+        ImageView imageView = getView().findViewById(R.id.input_imageview);
 
-            Cursor cursor = null;
+        if (requestCode == PICK_FROM_ALBUM) { // requestCode가 pickfromalbum이면 정상실행
+            Uri photoUri = data.getData();
+            Log.d(TAG, "PICK_FROM_ALBUM photoUri : " + photoUri);
 
             try {
-                String[] proj = {MediaStore.Images.Media.DATA};
-
-                assert photoUri != null;
-                cursor = getActivity().getContentResolver().query(photoUri, proj, null, null, null);
+                Bitmap bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(photoUri));
 
 
-                assert cursor != null;
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToFirst();
+                imageView.setImageBitmap(bitmap);
+                //messageText.setText("Uploading file path:" +imagepath);
 
-                temp_imageFile = new File(cursor.getString(column_index));
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
+            } catch (IOException ie) {
+                Log.e("error", "error");
+                //messageText.setText("Error");
             }
-            setImage();
         }
     }
 
     private void setImage() {
 
-        ImageView imageVIew = getView().findViewById(R.id.input_imageview);
+        ImageView imageView = getView().findViewById(R.id.input_imageview);
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap originalBm = BitmapFactory.decodeFile(temp_imageFile.getAbsolutePath(), options);
-        imageVIew.setImageBitmap(originalBm);
+        imageView.setImageBitmap(originalBm);
     }
 
     private void tedPermission() {
@@ -228,9 +227,7 @@ public class input_teamgrass extends Fragment {
             @Override
             public void onPermissionGranted() {
                 // 권한 요청 성공
-
             }
-
             @Override
             public void onPermissionDenied(ArrayList<String> deniedPermissions) {
                 // 권한 요청 실패
