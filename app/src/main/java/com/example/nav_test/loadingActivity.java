@@ -119,6 +119,11 @@ public class loadingActivity extends Activity {
                 }
 
                 myAlarm();
+                //예시로 하나의 알람 보내보기
+
+                NotificationHelper notificationHelper = new NotificationHelper(getApplicationContext());
+                notificationHelper.createNotification();
+
 
                 Intent main = new Intent(loadingActivity.this,MainActivity.class);
                 startActivity(main);
@@ -126,6 +131,9 @@ public class loadingActivity extends Activity {
 
             }
         },2000);//2초가 무슨의미..?
+
+
+
     }
 
 
@@ -142,11 +150,30 @@ public class loadingActivity extends Activity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         if (alarmManager != null) {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
             Log.i("loading_activity","alarm manager not null set repeat");
+        }
+        else{
+            Log.i("Alarm","alarm manager returned null");
         }
 
     }
 
+    int requestId = 10001;
+    /* //not imlemented yet another version of code
+    public void alarmFromAndroid(){
+        Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
+        AlarmManager alarmManager =
+                (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        PendingIntent pendingIntent =
+                PendingIntent.getService(context, requestId, intent,
+                        PendingIntent.FLAG_NO_CREATE);
+        if (pendingIntent != null && alarmManager != null) {
+            alarmManager.cancel(pendingIntent);
+        }
+
+
+    }
+    */
 
 }

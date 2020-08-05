@@ -36,6 +36,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if(needNotification(context)) {
+            Log.i("NotificationReceiver","need to show alarm");
             NotificationHelper notificationHelper = new NotificationHelper(context);
             notificationHelper.createNotification();
 

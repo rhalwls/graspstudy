@@ -49,7 +49,6 @@ public class individual_teamgrass extends frag_mygrass {
         super.onCreate(savedInstanceState);
         mContext = this.getContext();
         Log.i("individual_teamgrass","doing onCreate");
-        teamName = "아악";//강제 고정시킴 나중에 바꾸기 필수!!!
         path = requireContext().getFilesDir().getPath()+File.separator+"teamname";
         //replace default
 
