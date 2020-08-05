@@ -161,12 +161,7 @@ public class frag_mygrass extends Fragment {
         }
 
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-
-        super.onCreate(savedInstanceState);
+    public void loadPersonalData(){
         tv = new FrameLayout[numCols];
 
         String path = requireContext().getFilesDir().getPath();
@@ -206,6 +201,13 @@ public class frag_mygrass extends Fragment {
         Log.d("timecheck","oncreate"+(end-start));
         Log.i("frag_mygrass","# of 3 components : "+all_date.size()+" , "+ all_colors.size()+" , "+all_num_perday.size());
 
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+
+        super.onCreate(savedInstanceState);
+        loadPersonalData();
     }
 
     @Override

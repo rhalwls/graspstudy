@@ -174,7 +174,7 @@ public class page_teamgrass extends Fragment {
                     Bundle args = new Bundle();
                     String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));
                     args.putString("selected_team_name", txt_removed_teamname);
-                    fragment = new individual_teamgrass(new ReadMyName(mContext).getMyName());
+                    fragment = new individual_teamgrass(new ReadMyName(mContext).getMyName(),this);
                     fragment.setArguments(args);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

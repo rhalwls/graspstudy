@@ -35,21 +35,24 @@ public class individual_teamgrass extends frag_mygrass {
     String path;
     String which_block;//???????이게 모람
     ArrayList<String> memberNames;
-
+    Fragment toReplaceMother;
     public LinkedList<Integer>[] numMemberPerDay;
 
     public individual_teamgrass(){
         super("noname");
     }
-    public individual_teamgrass(String myid){
+    public individual_teamgrass(String myid,Fragment mother){
         super(myid);
+        toReplaceMother = mother;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this.getContext();
         which_block =getArguments().getString("selected_team_name");
         path = requireContext().getFilesDir().getPath()+File.separator+"teamname";
+        //replace default
 
 
     } // 변경
@@ -59,8 +62,7 @@ public class individual_teamgrass extends frag_mygrass {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                      Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root =  inflater.inflate(R.layout.fragment_grass, container, false);
-
+        View root =  inflater.inflate(R.layout.page_mygrass, container, false);
 
 
 
@@ -68,6 +70,8 @@ public class individual_teamgrass extends frag_mygrass {
 
         return root;
     }
+
+
 
     @Override
     protected void initListener() {
@@ -148,16 +152,6 @@ public class individual_teamgrass extends frag_mygrass {
             }
             Log.i("individual teamgrass","done parsing dates");
 
-            ///////////////////////////////////////////////////
-//            BufferedWriter bufferedWriter = null;
-//            try{
-//                String path = getFilesDir().getPath();
-//                Log.e("writing path",path);
-//                bufferedWriter = new BufferedWriter(new FileWriter(path + "/myGrassData.txt"));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-            //////////////////////////////////////////////////////
             for(Element team_date : team_dates){ // 팀원 한명의 data
                 String team_raw_date = team_date.attr("abs:data-date");
                 //String team_raw_color = team_date.attr("abs:fill");
