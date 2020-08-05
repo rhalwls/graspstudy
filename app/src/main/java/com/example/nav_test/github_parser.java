@@ -25,11 +25,14 @@ public class github_parser extends AsyncTask<Void, Void, Elements> {
     List<String> all_date = new ArrayList<>();
     List<String> all_colors = new ArrayList<>();
 
+    String myURL;
+
     String URL = "";
     String name = "";
 
     Document doc = null;
     Elements dates = null;
+    Elements imageURL = null;
 
     public github_parser(){
         name = "YooJaeHong";
@@ -66,8 +69,11 @@ public class github_parser extends AsyncTask<Void, Void, Elements> {
            // Log.e("파싱한 값 전체:",doc.html());
 
         Log.i("github_parser","query list"+doc.title());
-        dates = doc.select("rect[class=day]");
+        dates = doc.select("rect[class=day]"); // <rect class="day"
         Log.i("github_parser","github_parser dates : "+dates.text()+ " , # "+dates.size());
+        myURL = doc.select("img[class=avatar avatar-user width-full border bg-white]").attr("src");
+        Log.i("github_parser","github_parser image_url : "+myURL);
+
 
         return dates;
     }
