@@ -34,6 +34,7 @@
 
         </activity>
         <activity android:name=".ui.home.individual_teamgrass" />
+        <activity android:name=".ui.home.TeamActivity" />
 
         <receiver
             android:name=".NotificationReceiver"></receiver>

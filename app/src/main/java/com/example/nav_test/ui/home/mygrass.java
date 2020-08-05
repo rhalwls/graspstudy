@@ -44,11 +44,17 @@ public class mygrass extends Fragment {
     private ViewPager viewpager;
     private tabPagerAdapter pagerAdapter;
 
+    public mygrass(){
+        mContext = getContext();
+    }
+    public mygrass(Context context) {
+        mContext =context;
+    }
+
     //tabview 끝
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        Bundle args = getArguments();
         //myID = args.getString("myID", "rhalwls");
         //myID = LoginActivity.loadLogin();
         myID = "rhalwls";
@@ -63,6 +69,11 @@ public class mygrass extends Fragment {
         mTabLayout.addTab(mTabLayout.newTab().setText("내잔디밭"));
         mTabLayout.addTab(mTabLayout.newTab().setText("팀잔디밭"));
         mTabLayout.addTab(mTabLayout.newTab().setText("디파짓(예정)"));
+
+
+
+
+
 
 
         viewpager = (ViewPager) root.findViewById((R.id.pager_content));
@@ -92,6 +103,7 @@ public class mygrass extends Fragment {
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
+
         });
         Log.e("push block time", Long.toString(push_block_end - push_block_start));
 

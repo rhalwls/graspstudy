@@ -23,11 +23,12 @@ public class tabPagerAdapter extends FragmentPagerAdapter {
 
         super(fm);
         this.tabCount =tabcount;
-
         myID = myId;
         tab_num = new Fragment[3];
+
+
         tab_num[0] = new frag_mygrass(myID);
-        tab_num[1] = new page_teamgrass();
+        tab_num[1] = new page_teamgrass(this);
         tab_num[2] = new page_newgrass();
 
 
