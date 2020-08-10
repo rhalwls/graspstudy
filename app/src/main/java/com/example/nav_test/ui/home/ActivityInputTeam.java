@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.LinearLayoutCompat;
 
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
@@ -52,7 +51,7 @@ public class ActivityInputTeam extends Activity {
 
     EditText ed = null;
     final List<EditText> TeamMemberETs = new ArrayList<EditText>();
-    LinearLayoutCompat outer;
+    LinearLayout outer;
     EditText input_teamname;
     Button member_plus_button;
     LinearLayout layoutInputTeamMembers;
@@ -69,7 +68,8 @@ public class ActivityInputTeam extends Activity {
     int num_of_text = 1;
     public EditText addTeamMemberET(String memberName){
         EditText ed = new EditText(ActivityInputTeam.this);
-        ed.setHint("팀원 아이디");
+
+        ed.setHint("팀원 username");
         ed.setText(memberName);
         ed.setWidth(10);
         TeamMemberETs.add(ed);
@@ -112,6 +112,8 @@ public class ActivityInputTeam extends Activity {
         image_added = root.findViewById(R.id.team_edit_imageview);
         datePickerStart =(DatePicker) findViewById(R.id.team_start_date);
         layoutInputTeamMembers =(LinearLayout) findViewById(R.id.layout_input_team_members);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutInputTeamMembers.setLayoutParams(lp);
         Intent intent = getIntent();
         Team team = (Team) intent.getSerializableExtra("teamObj");
         if(team !=null){
