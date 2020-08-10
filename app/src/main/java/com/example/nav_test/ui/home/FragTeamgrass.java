@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.nav_test.R;
 import com.example.nav_test.github_parser;
@@ -23,7 +22,7 @@ import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;
 
 // 각 팀 멤버의 잔디를 심어보자
-public class individual_teamgrass extends frag_mygrass {
+public class FragTeamgrass extends FragGrass {
     Context mContext;
     String path;
     String teamName;//???????이게 모람
@@ -31,13 +30,13 @@ public class individual_teamgrass extends frag_mygrass {
 
     public LinkedList<Integer>[] numMemberPerDay;
 
-    public individual_teamgrass(){
+    public FragTeamgrass(){
         super("noname");
     }
-    public individual_teamgrass(String myid){
+    public FragTeamgrass(String myid){
         super(myid);
     }
-    public individual_teamgrass(String myid,Team team){
+    public FragTeamgrass(String myid, Team team){
         super(myid);
         memberNames=team.members;
         teamName = team.team_name;
@@ -176,16 +175,11 @@ public class individual_teamgrass extends frag_mygrass {
 
              */
             for(Element team_date : team_dates){ // 팀원 한명의 data중에 숫자 데이터만!
-                //String team_raw_date = team_date.attr("abs:data-date");
-                //String team_raw_color = team_date.attr("abs:fill");
+
                 String team_raw_num_perday = team_date.attr("abs:data-count");
-                //int color_idx = team_raw_color.indexOf("#");
-                //String team_url_refined_date = team_raw_date.substring(19);//??
-                //String team_url_refined_color = team_raw_color.substring(color_idx);
+
                 String team_url_refined_num_perday = team_raw_num_perday.substring(19);
 
-                //all_date.add(team_url_refined_date);
-                //all_colors.add(team_url_refined_color);
                 numMemberPerDay[i].add(Integer.parseInt(team_url_refined_num_perday));
 
                 Log.i("individual_teamgrass", "parsing"+memberNames.get(i)+ team_url_refined_num_perday);

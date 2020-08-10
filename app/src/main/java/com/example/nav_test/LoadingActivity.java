@@ -8,37 +8,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import androidx.fragment.app.Fragment;
-
-import com.bumptech.glide.Glide;
-import com.google.android.material.navigation.NavigationView;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-public class loadingActivity extends Activity {
+public class LoadingActivity extends Activity {
     Context context;
     protected void onCreate(Bundle savedInstanceState) {
         this.context = this;
@@ -134,7 +117,7 @@ public class loadingActivity extends Activity {
                 notificationHelper.createNotification();
 
 
-                Intent main = new Intent(loadingActivity.this,MainActivity.class);
+                Intent main = new Intent(LoadingActivity.this,MainActivity.class);
                 startActivity(main);
                 finish();
 
@@ -150,6 +133,14 @@ public class loadingActivity extends Activity {
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-hh-mm");
+        //for test while debug
+        calendar.add(Calendar.SECOND,30);
+        //for service
+        /*
+        calendar.set(Calendar.HOUR_OF_DAY, 21);
+        calendar.set(Calendar.MINUTE,0);
+
+         */
         Log.i("loading_activity","alarm time set currently : "+formatter.format(calendar.getTime()));
         if (calendar.getTime().compareTo(new Date()) < 0)
             calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -159,8 +150,10 @@ public class loadingActivity extends Activity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         if (alarmManager != null) {
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
-            Log.i("loading_activity","alarm manager not null set repeat");
+            //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000, pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000, pendingIntent);
+            //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pendingIntent);
+            Log.i("loading_activity","alarm manager not null set repeat, AlarmManager time interval"+AlarmManager.INTERVAL_FIFTEEN_MINUTES);
         }
         else{
             Log.i("Alarm","alarm manager returned null");

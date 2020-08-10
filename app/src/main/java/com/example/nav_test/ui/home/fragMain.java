@@ -19,7 +19,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
-public class mygrass extends Fragment {
+public class fragMain extends Fragment {
 
 
     int col_num = 6;
@@ -44,10 +44,10 @@ public class mygrass extends Fragment {
     private ViewPager viewpager;
     private tabPagerAdapter pagerAdapter;
 
-    public mygrass(){
+    public fragMain(){
         mContext = getContext();
     }
-    public mygrass(Context context) {
+    public fragMain(Context context) {
         mContext =context;
     }
 

@@ -34,7 +34,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class frag_mygrass extends Fragment {
+public class FragGrass extends Fragment {
 
     int col_num = 6;
     protected LinkedList<String> all_date = new LinkedList<String>();//every date representing a small rect(about a half year) // github의 잔디날짜를 파싱
@@ -58,7 +58,7 @@ public class frag_mygrass extends Fragment {
     View root;
     Button.OnClickListener onClickListener;
     FrameLayout[] tv;
-    public frag_mygrass(String myId) {
+    public FragGrass(String myId) {
         myID = myId;
     }
     protected static final int numCols = 25; // 한 row에 25개 1 2 3 4~25
@@ -73,7 +73,7 @@ public class frag_mygrass extends Fragment {
                 int numPerDay = all_num_perday.get(all_num_perday.size()-1-idx);
                 TextView dayDetail = (TextView) getActivity().findViewById(R.id.selectedRectDetail);
                 Log.i("frag_mygrass","idx : "+idx+" 00, allnumperday : "+numPerDay+" all_num_perday size : "+all_num_perday.size());
-                dayDetail.setText(fullDate+" 날에 심은 잔디는 "+numPerDay+" 개 입니다.");
+                dayDetail.setText(fullDate+" 일에 심은 잔디는 "+numPerDay+" 개 입니다.");
             }
         };
     }
@@ -126,7 +126,7 @@ public class frag_mygrass extends Fragment {
             colrow.setBackgroundColor(Color.parseColor(color_temp));
             colrow.setText(day);
             if(day.equals("01")){
-                colrow.setTextColor(Color.RED);
+                colrow.setTextColor(getResources().getColor(R.color.colorIndianRed));
             }
             ctr++;
         } catch (IllegalAccessException e) {
@@ -153,7 +153,8 @@ public class frag_mygrass extends Fragment {
             Log.i("grass","adding a month view(empty or valid) and repday : " +repday);
             if(repday<=7||i ==1){ //7보다 낮은 날짜면 월이 바뀜
                 int repmonth = getRectMM(rect);
-                tv.setText(MonthArr[repmonth]);
+                tv.setText(" "+MonthArr[repmonth]);
+                tv.setHeight(50);
                 Log.i("grass","intend to add month mark");
             }
 
@@ -180,6 +181,7 @@ public class frag_mygrass extends Fragment {
                 int colrowid = R.id.class.getField("col24row"+(8-j)).getInt(0);//7~8까지 가능해보이는데?
                 Button colrow =(Button)root.findViewById(colrowid);
                 colrow.setText(day);
+                colrow.setBackgroundColor(getResources().getColor(R.color.colorStrongGray));
                 cal.add(Calendar.DATE,-1);
 
             } catch (IllegalAccessException e) {
@@ -198,7 +200,8 @@ public class frag_mygrass extends Fragment {
                 if(today ==true){
                     int colrowid = R.id.class.getField("col24row"+(8-j)).getInt(0);
                     View border = (View)root.findViewById(colrowid).getParent();
-                    border.setBackgroundColor(Color.BLUE);
+                    border.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                    //Log.i("border sz",border.getWidth()+" , "+border.getHeight());
                     today = false;
                 }
             } catch (NoSuchFieldException e) {

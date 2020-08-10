@@ -3,8 +3,6 @@ package com.example.nav_test.ui.home;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nav_test.R;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TeamRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<String> mData = null;
 
@@ -73,34 +70,13 @@ public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerVie
                             mListener.onItemClick(v,pos);
                         }
                     }
-                    //notifyDataSetChanged();
                 }
             });
         }
-    }
-    public class ViewHolder2 extends RecyclerView.ViewHolder{
-        FrameLayout new_teamgrass; // 새로운 팀을 추가하세요
-        ViewHolder2(View itemView){
-            super(itemView);
 
-            new_teamgrass = itemView.findViewById(R.id.new_teamgrass);//수정 필요!
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION){
-                        if(mListener!=null){
-                            mListener.onItemClick(v,pos);
-                        }
-                    }
-
-                }
-            });
-        }
     }
 
-    team_recycler_view_adapter(ArrayList<String> list,Context context){
+    TeamRecyclerView(ArrayList<String> list, Context context){
         mData = list;
         mContext=context;
     }
@@ -121,24 +97,11 @@ public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerVie
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view;
-        team_recycler_view_adapter.ViewHolder0 vh0;
-        team_recycler_view_adapter.ViewHolder2 vh2;
+        TeamRecyclerView.ViewHolder0 vh0;
+        view = inflater.inflate(R.layout.teamgrass_recyclerview_item,parent,false);
+        vh0 = new TeamRecyclerView.ViewHolder0(view);
+        return vh0;
 
-        switch(viewType){
-            case 0:
-                view = inflater.inflate(R.layout.teamgrass_recyclerview_item,parent,false);
-                vh0 = new team_recycler_view_adapter.ViewHolder0(view);
-                return vh0;
-            case 2:
-                view = inflater.inflate(R.layout.item_new_teamgrass,parent,false);
-                vh2 = new team_recycler_view_adapter.ViewHolder2(view);
-                return vh2;
-        }
-
-
-        view = inflater.inflate(R.layout.item_new_teamgrass,parent,false);
-        vh2 = new team_recycler_view_adapter.ViewHolder2(view);
-        return vh2;
     }
 
     public void setDetailAsMembers(ViewHolder0 viewHolder0 , String teamName){
@@ -181,10 +144,6 @@ public class team_recycler_view_adapter extends RecyclerView.Adapter<RecyclerVie
                     viewHolder0.image.setImageBitmap(bitmap);
                 }
 
-                break;
-            case 2:
-                ViewHolder2 viewHolder2 = (ViewHolder2)holder;
-                viewHolder2.new_teamgrass.setBackgroundResource(R.drawable.round_cornered_add_icon);
                 break;
         }
 

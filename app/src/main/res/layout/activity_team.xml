@@ -5,17 +5,25 @@
     android:id="@+id/TeamLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dddddd"
     android:clickable="true"
     android:orientation="vertical"
-    tools:context="com.example.nav_test.ui.home.individual_teamgrass">
+    tools:context="com.example.nav_test.ui.home.FragTeamgrass">
 
+
+    <Button
+        android:id="@+id/btn_edit_team"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="팀 수정하기" />
 
     <TextView
-        android:id="@+id/teaminfo_temp"
+        android:id="@+id/team_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />
 
-
+    <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dip"
+    android:background="@color/colorGray" />
 </LinearLayout>

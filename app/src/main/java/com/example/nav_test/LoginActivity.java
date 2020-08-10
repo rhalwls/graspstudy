@@ -72,7 +72,7 @@ public class LoginActivity extends Activity {
 
     }
     void afterLogin(){
-        Intent loading = new Intent(LoginActivity.this,loadingActivity.class);
+        Intent loading = new Intent(LoginActivity.this, LoadingActivity.class);
         startActivity(loading);
         finish();
     }

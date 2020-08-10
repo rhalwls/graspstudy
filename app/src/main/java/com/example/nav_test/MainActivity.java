@@ -3,7 +3,6 @@ package com.example.nav_test;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
@@ -11,8 +10,6 @@ import com.example.nav_test.ui.github_parser_imageURL;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-
-import android.text.TextUtils;
 
 import android.util.Log;
 import android.view.View;
@@ -34,7 +31,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
 
@@ -77,16 +73,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab); // 우측하단 동그라미 버튼
 
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });//버블
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 

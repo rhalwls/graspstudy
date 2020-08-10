@@ -11,10 +11,12 @@
         android:id="@+id/layout_tab"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="#00bbbb"
+        android:background="@color/colorFirstDark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabMode="fixed"></com.google.android.material.tabs.TabLayout>
+        app:tabIndicatorColor="@color/colorIndianRed"
+        app:tabMode="fixed"
+        app:tabTextColor="@color/colorWhite"></com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager_content"

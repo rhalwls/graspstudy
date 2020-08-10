@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nav_test.R;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class recycler_view_adapter extends RecyclerView.Adapter<recycler_view_adapter.ViewHolder> {
+public class TeamRecyclerAdapter extends RecyclerView.Adapter<TeamRecyclerAdapter.ViewHolder> {
     Context context;
 
     ArrayList<Integer> month_position= new ArrayList<>();
@@ -44,19 +43,19 @@ public class recycler_view_adapter extends RecyclerView.Adapter<recycler_view_ad
     }
 
 
-        recycler_view_adapter(ArrayList<Integer> list,int max){
+        TeamRecyclerAdapter(ArrayList<Integer> list, int max){
         mData = list;
         this.max = max;
 
     }
 
     @Override
-    public recycler_view_adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TeamRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.grassblock_recyclerview_item,parent,false);
-        recycler_view_adapter.ViewHolder vh = new recycler_view_adapter.ViewHolder(view);
+        TeamRecyclerAdapter.ViewHolder vh = new TeamRecyclerAdapter.ViewHolder(view);
 
 
 
@@ -64,7 +63,7 @@ public class recycler_view_adapter extends RecyclerView.Adapter<recycler_view_ad
     }
 
     @Override
-    public void onBindViewHolder(@NonNull recycler_view_adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TeamRecyclerAdapter.ViewHolder holder, int position) {
         DateFormat only_d = new SimpleDateFormat("dd");
         DateFormat only_y_m = new SimpleDateFormat("yy_MM");
 

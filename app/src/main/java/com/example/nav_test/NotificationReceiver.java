@@ -34,6 +34,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     }
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.i("NotificationReceiver","onReceive runs "+intent.getPackage());
 
         if(needNotification(context)) {
             Log.i("NotificationReceiver","need to show alarm");

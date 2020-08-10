@@ -3,12 +3,9 @@ package com.example.nav_test.ui.home;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,21 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.nav_test.LoadingActivity;
 import com.example.nav_test.R;
-import com.example.nav_test.ReadMyName;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.ArrayList;
 
-public class page_teamgrass extends Fragment {
+public class PageTeams extends Fragment {
 
     Fragment thisfrag = this;
     tabPagerAdapter pagerAdapter;
@@ -49,10 +42,10 @@ public class page_teamgrass extends Fragment {
     Intent toInputgrass = null;
 
     Context mContext;
-    public page_teamgrass() {
+    public PageTeams() {
         // Required empty public constructor
     }
-    public page_teamgrass(tabPagerAdapter adapter) {
+    public PageTeams(tabPagerAdapter adapter) {
         pagerAdapter = adapter;
     }
 
@@ -69,9 +62,9 @@ public class page_teamgrass extends Fragment {
             if(!teamname_dir.exists())
                 teamname_dir.mkdirs();
 
-        toTeamgrass = new Intent(requireContext(), individual_teamgrass.class);
+        toTeamgrass = new Intent(requireContext(), FragTeamgrass.class);
 
-        toInputgrass = new Intent(requireContext(),input_teamgrass.class);
+        toInputgrass = new Intent(requireContext(), ActivityInputTeam.class);
 
 
 
@@ -111,65 +104,33 @@ public class page_teamgrass extends Fragment {
         View root = inflater.inflate(R.layout.page_teamgrass, container, false);
 
         Log.e("file_length",Integer.toString(fileArray_length));
+        FloatingActionButton fab = root.findViewById(R.id.add_team); // 우측하단 동그라미 버튼
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View view) {
+                                       Intent intent = new Intent(
+                                               mContext, // 현재 화면의 제어권자
+                                               ActivityInputTeam.class); // 다음 넘어갈 클래스 지정
+                                       startActivity(intent); // 다음 화면으로 넘어간다
+
+                                   }
+                               });//버블
 
         final RecyclerView recyclerView = root.findViewById(R.id.teamgrass_recyclerview);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
 
-        final team_recycler_view_adapter adapter = new team_recycler_view_adapter(all_file_array,mContext);
+        final TeamRecyclerView adapter = new TeamRecyclerView(all_file_array,mContext);
 
-        adapter.setOnItemClickListener(new team_recycler_view_adapter.OnItemClickListener(){
+        adapter.setOnItemClickListener(new TeamRecyclerView.OnItemClickListener(){
             @Override
             public void onItemClick(View v, int pos) {
                 Fragment fragment;
 
                 if(pos ==all_file_array.size()-1) {
-                    fragment = new input_teamgrass();
 
-
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.add(R.id.drawer_layout, fragment); // 네비게이션바
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-
-                    Thread thread = new Thread(new Runnable() {
-                        @Override
-
-                        public void run() {
-
-
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                try {
-
-                                    sharedDirectoryPath = Paths.get(path);
-
-                                    watchService = FileSystems.getDefault().newWatchService();
-                                    watchKey = sharedDirectoryPath.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
-
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                while (true) {
-                                    for (WatchEvent<?> watchEvent : watchKey.pollEvents()) {
-                                        getActivity().runOnUiThread(new Runnable(){
-                                            @Override
-                                            public void run() {
-                                                loadAllFile(path);
-                                                Log.e("watchevent", "occured");
-                                                adapter.notifyDataSetChanged();
-
-                                            }
-                                        });
-                                        break;
-                                    }
-                                }
-                            }
-
-                        }
-                    });
-                    thread.start();
                 }//onclick end
 
 
@@ -177,23 +138,13 @@ public class page_teamgrass extends Fragment {
                     Bundle args = new Bundle();
                     String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));
                     args.putString("selected_team_name", txt_removed_teamname);
-                    /*
-                    fragment = new individual_teamgrass(new ReadMyName(mContext).getMyName(),page_teamgrass.this);
 
-                    fragment.setArguments(args);
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.drawer_layout, fragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-
-                     */
                     Team team = new Team(txt_removed_teamname);
                     team.loadTeamMembers(mContext);
 
                     Intent intent = new Intent(
                             mContext, // 현재 화면의 제어권자
-                            TeamActivity.class); // 다음 넘어갈 클래스 지정
+                            LoadingTeamGrass.class); // 다음 넘어갈 클래스 지정
 
                     intent.putExtra("teamObj",team);
                     startActivity(intent); // 다음 화면으로 넘어간다
@@ -201,7 +152,7 @@ public class page_teamgrass extends Fragment {
 
             }
         });
-        adapter.setOnButtonClickListener((new team_recycler_view_adapter.OnButtonClickListener() {
+        adapter.setOnButtonClickListener((new TeamRecyclerView.OnButtonClickListener() {//팀목록의 팀 하나를 눌렀을 때
             @Override
             public void onButtonClick(View v, int pos) {
                 File file = new File(path+"/"+all_file_array.get(pos));

@@ -5,152 +5,168 @@
         style="@style/grass_calandar">
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/left_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:gravity="center">
+            android:background="@null"
+            android:src="@drawable/left">
 
-            <ImageButton
-                android:id="@+id/left_btn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@null"
-                android:src="@drawable/left">
+        </ImageButton>
 
-            </ImageButton>
+        <TextView
+            android:id="@+id/selected_date"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="2020년 01월"
+            android:textSize="30dp"></TextView>
 
-            <TextView
-                android:id="@+id/selected_date"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="2020년 01월"
-                android:textSize="30dp">
-            </TextView>
+        <ImageButton
+            android:id="@+id/right_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/right">
 
-            <ImageButton
-                android:id="@+id/right_btn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@null"
-                android:src = "@drawable/right">
+        </ImageButton>
+    </LinearLayout>
 
-            </ImageButton>
-        </LinearLayout>
-
-
+    <View
+        android:layout_toRightOf="@+id/text1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/colorGray" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TableLayout
-            android:layout_width="match_parent"
+            android:layout_width="60dp"
             android:layout_height="match_parent">
 
+
+            <TableRow
+                android:layout_width = "match_parent"
+                android:layout_height = "100dp"
+                android:layout_gravity = "center"
+                android:layout_weight="1"
+                android:gravity="center" />
+
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="요일" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
                     android:text="SUN" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:text="MON" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:text="TUE" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:text="WED" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:text="THU" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="FRI"/>
+                    android:layout_weight="1"
+                    android:text="FRI" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="SAT"/>
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="SAT" />
             </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center" />
+
 
         </TableLayout>
-
+        <View
+            android:layout_toRightOf="@+id/text1"
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:background="@color/colorGray"/>
         <HorizontalScrollView
             android:id="@+id/내잔디밭_scrollView"
             android:layout_width="match_parent"
@@ -1504,6 +1520,11 @@
                         <Button
                             android:id="@+id/col1row7"
                             style="@style/grass_box_wrap" />
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
                     </FrameLayout>
 
                     <FrameLayout
@@ -1721,13 +1742,19 @@
         </HorizontalScrollView>
 
     </LinearLayout>
-
+    <View
+        android:layout_toRightOf="@+id/text1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/colorGray" />
     <TextView
         android:id="@+id/selectedRectDetail"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        android:text="클릭한 날의 잔디 수가 나와요" />
+        android:text="클릭한 날의 잔디 수가 나와요"
+        android:textSize="13sp"
+        android:padding="15dp"/>
 </LinearLayout>
 
 
