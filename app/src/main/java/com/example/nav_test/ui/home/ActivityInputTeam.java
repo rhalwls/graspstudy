@@ -13,6 +13,7 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.nav_test.R;
@@ -53,6 +55,7 @@ public class ActivityInputTeam extends Activity {
     LinearLayoutCompat outer;
     EditText input_teamname;
     Button member_plus_button;
+    LinearLayout layoutInputTeamMembers;
     Button confirm;
     Button image_add_button;
     ImageView image_added;
@@ -64,17 +67,14 @@ public class ActivityInputTeam extends Activity {
     Activity root = null;
 
     int num_of_text = 1;
-    public void addTeamMemberET(String memberName){
+    public EditText addTeamMemberET(String memberName){
         EditText ed = new EditText(ActivityInputTeam.this);
-        ed.setWidth(200);
         ed.setHint("팀원 아이디");
         ed.setText(memberName);
-                /*
-                ViewGroup.LayoutParams params =new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                ed.setLayoutParams(params);
-                */
+        ed.setWidth(10);
         TeamMemberETs.add(ed);
-        outer.addView(ed);
+        layoutInputTeamMembers.addView(ed);
+        return ed;
     }
     public static Date getDateFromDatePicker(DatePicker datePicker){
         int day = datePicker.getDayOfMonth();
@@ -111,6 +111,7 @@ public class ActivityInputTeam extends Activity {
         image_add_button = root.findViewById(R.id.input_image_button);
         image_added = root.findViewById(R.id.team_edit_imageview);
         datePickerStart =(DatePicker) findViewById(R.id.team_start_date);
+        layoutInputTeamMembers =(LinearLayout) findViewById(R.id.layout_input_team_members);
         Intent intent = getIntent();
         Team team = (Team) intent.getSerializableExtra("teamObj");
         if(team !=null){
@@ -125,11 +126,8 @@ public class ActivityInputTeam extends Activity {
             Log.i("ActivityInputTeam","team is null");
         }
 
-        EditText ed = new EditText(this);
-        ed.setHint("팀원 아이디");
-        ed.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        TeamMemberETs.add(ed);
-        outer.addView(ed);
+        addTeamMemberET("");//empty edit text
+
 
         image_add_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,13 +140,13 @@ public class ActivityInputTeam extends Activity {
             @Override
             public void onClick(View v) {
                 addTeamMemberET("");
-
             }
         });
 
         confirm.setOnClickListener(new View.OnClickListener() {//store the input and finish activity
             @Override
             public void onClick(View v) {
+                //시간이 되면 입력 양식이 올바른지 검사하는 코드도 만들 것
                 String path = "";
                 String teamname = input_teamname.getText().toString();
                 try {
@@ -162,10 +160,13 @@ public class ActivityInputTeam extends Activity {
                     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path + "/" + teamname + ".txt"));
                     // output2 = new FileOutputStream(path+"/team3.txt");
                     for (int i = 0; i < TeamMemberETs.size(); i++) {
+
                         String member = TeamMemberETs.get(i).getText().toString();
-                        Log.e("writed id", member);
-                        bufferedWriter.write(member);
-                        bufferedWriter.newLine();
+                        if(member!="") {//시간이 되면 존재하는 아이디인지 검사도 할 것
+                            Log.e("writed id", member);
+                            bufferedWriter.write(member);
+                            bufferedWriter.newLine();
+                        }
                     }
                     bufferedWriter.close();
                 } catch (FileNotFoundException e) {

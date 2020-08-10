@@ -9,113 +9,126 @@
     android:orientation="vertical"
     android:clickable="true"
     tools:context=".ui.home.ActivityInputTeam">
-
-    <ImageView
-        android:id="@+id/team_edit_imageview"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/empty_pic" />
-
-
-    <!-- TODO: Update blank fragment layout -->
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/text_container"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="100dp"
-            android:text="팀이름" />
-
-        <EditText
-            android:id="@+id/input_teamname_text"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="팀 이름"></EditText>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="100dp"
-            android:text="멤버들" />
-        <EditText
-            android:id="@+id/input_teammember_text"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="멤버 아이디"></EditText>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="100dp"
-            android:text="시작일" />
-        <DatePicker
-            android:id="@+id/team_start_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:datePickerMode="spinner"
-            android:calendarViewShown="false"/>
-
-
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-<androidx.appcompat.widget.LinearLayoutCompat
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_gravity="center">
-
-    <Button
-        android:id="@+id/input_image_button"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:text="이미지 가져오기"
-        android:background="@drawable/radius"
-
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Content here -->
+
+            <ImageView
+                android:id="@+id/team_edit_imageview"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/empty_pic" />
 
 
-    </Button>
-    <Button
-        android:id="@+id/member_plus_btn"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:background="@drawable/radius"
-        android:text="인원추가"
-        android:layout_weight="1"
-        >
+            <!-- TODO: Update blank fragment layout -->
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/text_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="100dp"
+                    android:text="팀이름" />
+
+                <EditText
+                    android:id="@+id/input_teamname_text"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="팀 이름"></EditText>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="100dp"
+                    android:text="멤버들" />
+                <LinearLayout
+                    android:id="@+id/layout_input_team_members"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="100dp"
+                    android:text="시작일" />
+                <DatePicker
+                    android:id="@+id/team_start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"/>
 
 
-    </Button>
-    <Button
-        android:id="@+id/create_btn"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:padding="10dp"
-        android:text="생성"
-        android:layout_gravity="center"
-        android:background="@drawable/radius"
-        android:layout_weight="1">
 
-    </Button>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/input_image_button"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:text="이미지 가져오기"
+                    android:background="@drawable/radius"
+
+                    >
+
+
+                </Button>
+                <Button
+                    android:id="@+id/member_plus_btn"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:background="@drawable/radius"
+                    android:text="인원추가"
+                    android:layout_weight="1"
+                    >
+
+
+                </Button>
+                <Button
+                    android:id="@+id/create_btn"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:text="생성"
+                    android:layout_gravity="center"
+                    android:background="@drawable/radius"
+                    android:layout_weight="1">
+
+                </Button>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
