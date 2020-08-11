@@ -191,8 +191,9 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 clearApplicationData(getApplicationContext());
                                 Intent i = new Intent(MainActivity.this/*현재 액티비티 위치*/ , LoginActivity.class/*이동 액티비티 위치*/);
-                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 startActivity(i);
+                                finish();
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {

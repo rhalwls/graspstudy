@@ -25,6 +25,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.widget.LinearLayoutCompat;
 
+import com.example.nav_test.ImageProcessor;
 import com.example.nav_test.R;
 import com.example.nav_test.ReadMyName;
 import com.gun0912.tedpermission.PermissionListener;
@@ -61,7 +62,7 @@ public class ActivityInputTeam extends Activity {
     ImageView image_added;
     DatePicker datePickerStart;
 
-
+    ImageProcessor imageProcessor;
 
 
     Activity root = null;
@@ -69,10 +70,9 @@ public class ActivityInputTeam extends Activity {
     int num_of_text = 1;
     public EditText addTeamMemberET(String memberName){
         EditText ed = new EditText(ActivityInputTeam.this);
-
+        ed.setWidth(50);
         ed.setHint("팀원 username");
         ed.setText(memberName);
-        ed.setWidth(10);
         TeamMemberETs.add(ed);
         layoutInputTeamMembers.addView(ed);
         return ed;
@@ -115,6 +115,9 @@ public class ActivityInputTeam extends Activity {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutInputTeamMembers.setLayoutParams(lp);
         Intent intent = getIntent();
+
+        imageProcessor = new ImageProcessor(getApplicationContext());
+
         Team team = (Team) intent.getSerializableExtra("teamObj");
         if(team !=null){
             mappingUI(team); //edit team
@@ -184,7 +187,7 @@ public class ActivityInputTeam extends Activity {
                 if (image_added.getDrawable()!=null){
                     image_added.buildDrawingCache();
                     Bitmap bitmap = image_added.getDrawingCache();
-                    saveBitmapTojpeg(bitmap,teamname);
+                    imageProcessor.saveBitmapTojpeg(bitmap,teamname);
                 }
 
 
@@ -196,14 +199,14 @@ public class ActivityInputTeam extends Activity {
     }
 
 
-    public void mappingUI(Team team) {
+    public void mappingUI(Team team) { // 아마 기존 팀정보 불러오는 것(팀 수정시 사용되는거같음)
         input_teamname.setText(team.team_name);
-        setTeamImg(team.pictureUri);
+        imageProcessor.setTeamImg(team.pictureUri, image_added);
         ArrayList<String> teamMembers = team.getMembers();
         for(int i=0;i<team.getMembers().size();i++){
             addTeamMemberET(teamMembers.get(i));
         }
-        setTeamImg(team.pictureUri);
+        imageProcessor.setTeamImg(team.pictureUri, image_added);
 
     }
 
@@ -224,22 +227,11 @@ public class ActivityInputTeam extends Activity {
         if (image_added.getDrawable()!=null){
             image_added.buildDrawingCache();
             Bitmap bitmap = image_added.getDrawingCache();
-            saveBitmapTojpeg(bitmap,teamname);
+            imageProcessor.saveBitmapTojpeg(bitmap,teamname);
         }
         return team;
     }
-    public void setTeamImgWithDefault(){
-        Uri photoUri=Team.getDefaultPictureUri(this);
-        Bitmap bitmap = null;
 
-        try {
-            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(photoUri));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        image_added.setImageBitmap(bitmap);
-    }
     public void setDateStartRange(DatePicker datePicker){
         //현재로부터 5개월 전까지만 스터디 기간으로 잡는다
         Date curdate = new Date();
@@ -248,21 +240,6 @@ public class ActivityInputTeam extends Activity {
         datePicker.setMinDate(minDate.getTimeInMillis());
         datePicker.setMaxDate(curdate.getTime());
     }
-    public void setTeamImg(Uri photoUri){
-        try {
-            Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(photoUri));
-            image_added.setImageBitmap(bitmap);
-            //messageText.setText("Uploading file path:" +imagepath);
-
-        } catch (IOException ioe) {
-            Log.e("error", "error while setting team picture");
-            setTeamImgWithDefault();
-        }
-        catch(NullPointerException npe){
-            setTeamImgWithDefault();
-        }
-    }
-
 
     private static final int PICK_FROM_ALBUM = 1;
 
@@ -281,19 +258,10 @@ public class ActivityInputTeam extends Activity {
         if (requestCode == PICK_FROM_ALBUM) { // requestCode가 pickfromalbum이면 정상실행
             Uri photoUri = data.getData();
             Log.d(TAG, "PICK_FROM_ALBUM photoUri : " + photoUri);
-            setTeamImg(photoUri);
+            imageProcessor.setTeamImg(photoUri, image_added);
 
         }
     }
-
-    private void setImage() {
-
-        //ImageView imageView = findViewById(R.id.input_imageview);
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        Bitmap originalBm = BitmapFactory.decodeFile(temp_imageFile.getAbsolutePath(), options);
-        image_added.setImageBitmap(originalBm);
-    }
-
     private void tedPermission() {
 
         PermissionListener permissionListener = new PermissionListener() {
@@ -314,34 +282,6 @@ public class ActivityInputTeam extends Activity {
                 .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .check();
 
-    }
-
-    private void saveBitmapTojpeg(Bitmap bitmap,String name){
-        File storage = getCacheDir();
-        String fileName = name+".jpg";
-        File tempFile = new File(storage,fileName);
-
-        try{
-
-            tempFile.createNewFile();
-
-            FileOutputStream out = new FileOutputStream(tempFile);
-
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
-
-            out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public File getCacheDir() {
-        String path = "/data/data/com.example.nav_test/cache";
-        File file = new File(path);
-        return file;
     }
 
 }
