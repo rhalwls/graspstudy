@@ -8,8 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
-
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.InputType;
@@ -25,7 +23,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import androidx.appcompat.widget.LinearLayoutCompat;
+
 import com.example.nav_test.R;
+import com.example.nav_test.ReadMyName;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
@@ -92,7 +93,6 @@ public class ActivityInputTeam extends Activity {
         tedPermission();
         setContentView(R.layout.activity_input_team);
         onCreateView(getLayoutInflater());
-        ImageView image_added;
 
         Log.i("ActivityInputTeam","onCreate()");
 
@@ -154,7 +154,7 @@ public class ActivityInputTeam extends Activity {
                 try {
                     path = getFilesDir().getPath() + File.separator + "teamname";
                     File teamname_dir = new File(path);
-                    if (!teamname_dir.exists())
+                    if (!teamname_dir.exists()) // teamname_dir이 존재하지않는다면 만든다.
                         teamname_dir.mkdirs();
 
                     //Todo : 팀원아이디 입력 부분 파일 저장 파트
