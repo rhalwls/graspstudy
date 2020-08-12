@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 
 import com.example.nav_test.R;
@@ -25,6 +26,8 @@ import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+
 public class Team implements Serializable {
 
     public String team_name;
@@ -79,6 +82,8 @@ public class Team implements Serializable {
 
     public Team(String tn){
         team_name= tn;
+        members = new ArrayList<String>();
+        startDate = new Date();
 
         pictureUri = null;
     }
@@ -90,8 +95,10 @@ public class Team implements Serializable {
         this.pictureUri = pictureUri;
     }
     public static final String genrPath(Context context, String user, String team_name){
-        String path = context.getFilesDir().getPath()+"/useranem/"+user+"/teamname/"+team_name+".dat";
-        return path;
+        String root = Environment.getExternalStorageDirectory().toString();
+        File teamFile = new File(root + "/username/"+user+"/teamname/"+team_name+".dat");
+
+        return root + "/username/"+user+"/teamname/"+team_name+".dat";
     }
 
     public static final Team loadTeamFile(Context context,String user,String team_name){
@@ -137,9 +144,19 @@ public class Team implements Serializable {
     }
 
     public static final String[] getTeamFileLists(Context context,String user){
-        String userPath =context.getFilesDir().getPath()+"/useranem/"+user+"/teamname";
+        String userPath =context.getCacheDir()+"/username/"+user+"/teamname";
         File serFile = new File(userPath);
+        Log.i("Team","reading Team List, mom folder file is "+serFile.getPath());
+        if (! serFile.isDirectory()){
+            Log.i("Team","user and team name path wasn't directory");
+            if (! serFile.mkdirs()){
+                Log.i("Team","tried to make directory but failed");
+            }
+        }
         String[] files = serFile.list();
+
+
+
         //log
         for(int i =0;i<files.length;i++){
             Log.i("Team getTeamFileLists",files[i].split(".")[0]);

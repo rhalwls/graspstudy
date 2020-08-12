@@ -52,13 +52,6 @@ public class PageTeams extends Fragment {
         super.onCreate(savedInstanceState);
 
         mContext = this.getContext();
-
-
-        path = requireContext().getFilesDir().getPath()+File.separator+"teamname";
-        File teamname_dir = new File(path);
-        if(!teamname_dir.exists())
-            teamname_dir.mkdirs();
-
         toTeamgrass = new Intent(requireContext(), FragTeamgrass.class);
 
         toInputgrass = new Intent(requireContext(), ActivityInputTeam.class);

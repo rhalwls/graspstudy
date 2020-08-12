@@ -64,21 +64,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
 
-//alarm<- 왜 알람 기능을 주석처리 한 것이지?
-       /* this.context = this;
-
-        alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        Intent alarm_reciver_Intent = new Intent(this.context,Alarm_Reciver.class);
-
-
-
-        pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,alarm_reciver_Intent,PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+(10000),pendingIntent);
-        Toast.makeText(this,"alarm set after"+1+"second",Toast.LENGTH_LONG).show();
-        */
-
-//alarm end
-
         Log.i("MainActivity","right before searching toolbar");
 
         Toolbar toolbar = findViewById(R.id.toolbar);

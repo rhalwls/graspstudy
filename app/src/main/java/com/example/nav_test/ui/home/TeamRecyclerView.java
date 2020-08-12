@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nav_test.R;
+import com.example.nav_test.ReadMyName;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.Iterator;
 public class TeamRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<String> mData = null;
-
+    String user;
     int max;
 
     Context mContext;
@@ -79,6 +80,7 @@ public class TeamRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
     TeamRecyclerView(ArrayList<String> list, Context context){
         mData = list;
         mContext=context;
+        user = new ReadMyName(context).getMyName();
     }
 
     @Override
@@ -105,8 +107,8 @@ public class TeamRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public void setDetailAsMembers(ViewHolder0 viewHolder0 , String teamName){
-        Team team = new Team(teamName);
-        ArrayList<String> teamMembers = team.loadTeamMembers(mContext);
+        Team team = Team.loadTeamFile(mContext,user,teamName);
+        ArrayList<String> teamMembers =team.getMembers();
         int team_size = teamMembers.size();
         String detailStr = "";
         Iterator<String> it=teamMembers.iterator();

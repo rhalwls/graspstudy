@@ -16,8 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ImageProcessor extends Activity {
-
+public class ImageProcessor {
     Context context;
 
     public ImageProcessor(Context mContext){
@@ -27,7 +26,7 @@ public class ImageProcessor extends Activity {
     public void setTeamImg(Uri photoUri, ImageView image_added){ // Uri받아서 imageview에 set해주기. 없으면 default 메소드로 기본 이미지 set
     //uri를 bitmap으로 열어주는 것.
         try{
-        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(photoUri));
+        Bitmap bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(photoUri));
         image_added.setImageBitmap(bitmap);
 
     } catch (IOException ioe) {
@@ -48,7 +47,7 @@ public class ImageProcessor extends Activity {
         Bitmap bitmap = null;
 
         try {
-            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(photoUri));
+            bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(photoUri));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

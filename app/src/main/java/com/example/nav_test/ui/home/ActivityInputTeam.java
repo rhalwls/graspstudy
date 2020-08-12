@@ -49,11 +49,13 @@ public class ActivityInputTeam extends Activity {
 
     private static final String TAG = "beomgeun";
     private Boolean isPermission = true;
+    String user;
     String formerTeamName = "NOT_EXIST";//NOT_EXIST가 아니면 기존 파일을 지우는 작업도 필요함
+    private static final String NOT_EXIST ="NOT_EXIST";
     File temp_imageFile;
 
     EditText ed = null;
-    final List<EditText> TeamMemberETs = new ArrayList<EditText>();
+    List<EditText> TeamMemberETs = new ArrayList<EditText>();
     LinearLayout outer;
     EditText input_teamname;
     Button member_plus_button;
@@ -95,7 +97,7 @@ public class ActivityInputTeam extends Activity {
         tedPermission();
         setContentView(R.layout.activity_input_team);
         onCreateView(getLayoutInflater());
-
+        user = new ReadMyName(this).getMyName();
         Log.i("ActivityInputTeam","onCreate()");
 
     }
@@ -105,7 +107,7 @@ public class ActivityInputTeam extends Activity {
 
         // Inflate the layout for this fragment
         root = this;
-
+        //map the views to java variables
         outer = root.findViewById(R.id.text_container);
         input_teamname = root.findViewById(R.id.input_teamname_text);
         member_plus_button = root.findViewById(R.id.member_plus_btn);
@@ -129,6 +131,9 @@ public class ActivityInputTeam extends Activity {
             mappingUI(team); //edit team
             formerTeamName = team.team_name;
             //need to erase the former team and store the edited info as a new team(for time saving)
+            //erase when the user REALLY WANTS TO UPDATE TEAM INFO
+
+
             Log.i("ActivityInputTeam","team is not null");
         }
         else{
@@ -160,31 +165,33 @@ public class ActivityInputTeam extends Activity {
                 //시간이 되면 입력 양식이 올바른지 검사하는 코드도 만들 것
                 Team team = mappingTeam();
                 String teamname = team.team_name;
-                if(ActivityInputTeam.this.formerTeamName!=""){
+                if(ActivityInputTeam.this.formerTeamName!=NOT_EXIST){
                     //formerTeamName이 이전 파일 이름
-                    deleteFile(teamname);
+                    Team.deleteTeamFile(ActivityInputTeam.this, user, formerTeamName);
                 }
 
                 if(teamname == ""||team.getMembers().size()==0){
                     //입력 양식이 올바른지 검사
-                    Toast toast = Toast.makeText(ActivityInputTeam.this, "입력 양식이 틀렸습니다.", Toast.LENGTH_LONG);
+                    //시간이 된다면 유효한 깃허브 아이디인지도 확인하기(아직 안함!!!!)
+                    Toast toast = Toast.makeText(ActivityInputTeam.this, "팀 이름이 비었거나 팀 멤버가 없습니다", Toast.LENGTH_LONG);
                     toast.show();
                 }
-                team.storeTeamFile(ActivityInputTeam.this, new ReadMyName(ActivityInputTeam.this).getMyName());
+                else {
+                    Log.i("ActivityInputTeam","팀을 생성중입니다.");
+                    team.storeTeamFile(ActivityInputTeam.this, user);
 
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(ActivityInputTeam.this.getCurrentFocus().getWindowToken(),0);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(ActivityInputTeam.this.getCurrentFocus().getWindowToken(), 0);
 
 
+                    if (image_added.getDrawable() != null) {
+                        image_added.buildDrawingCache();
+                        Bitmap bitmap = image_added.getDrawingCache();
+                        imageProcessor.saveBitmapTojpeg(bitmap, teamname);
+                    }
 
-                if (image_added.getDrawable()!=null){
-                    image_added.buildDrawingCache();
-                    Bitmap bitmap = image_added.getDrawingCache();
-                    imageProcessor.saveBitmapTojpeg(bitmap,teamname);
+                    ActivityInputTeam.this.finish();//이렇게 하지 말고 다시 잔디 다람쥐 보여주는 게 더 맞는듯
                 }
-
-
-                ActivityInputTeam.this.finish();
             }
 
         });
@@ -200,14 +207,14 @@ public class ActivityInputTeam extends Activity {
             addTeamMemberET(teamMembers.get(i));
         }
         imageProcessor.setTeamImg(team.pictureUri, image_added);
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public Team mappingTeam(){
         String teamname = input_teamname.getText().toString();
         Team team = new Team(teamname);
-        for (int i = 0; i < TeamMemberETs.size(); i++) {//convert team member edittexts to LinkedList
+        Log.i("ActivityInputTeam","Members EditText size : "+TeamMemberETs.size());
+        for (int i = 0; i < TeamMemberETs.size(); i++) {//convert team member edittexts and append to LinkedList
             String member = TeamMemberETs.get(i).getText().toString();
             Log.e("writed id", member);
             team.members.add(member);

@@ -58,6 +58,9 @@ public class FragGrass extends Fragment {
     View root;
     Button.OnClickListener onClickListener;
     FrameLayout[] tv;
+    public FragGrass(){
+
+    }
     public FragGrass(String myId) {
         myID = myId;
     }
