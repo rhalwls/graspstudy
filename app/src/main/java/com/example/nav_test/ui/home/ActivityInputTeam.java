@@ -24,8 +24,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.nav_test.R;
+import com.example.nav_test.ReadMyName;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
@@ -59,10 +61,6 @@ public class ActivityInputTeam extends Activity {
     Button image_add_button;
     ImageView image_added;
     DatePicker datePickerStart;
-
-
-
-
     Activity root = null;
 
     int num_of_text = 1;
@@ -71,7 +69,7 @@ public class ActivityInputTeam extends Activity {
 
         ed.setHint("팀원 username");
         ed.setText(memberName);
-        ed.setWidth(10);
+        ed.setWidth(200);
         TeamMemberETs.add(ed);
         layoutInputTeamMembers.addView(ed);
         return ed;
@@ -114,9 +112,13 @@ public class ActivityInputTeam extends Activity {
         layoutInputTeamMembers =(LinearLayout) findViewById(R.id.layout_input_team_members);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutInputTeamMembers.setLayoutParams(lp);
+
+
+
+
         Intent intent = getIntent();
         Team team = (Team) intent.getSerializableExtra("teamObj");
-        if(team !=null){
+        if(team !=null){// 실험
             mappingUI(team); //edit team
             formerTeamName = team.team_name;
             //need to erase the former team and store the edited info as a new team(for time saving)
@@ -149,33 +151,20 @@ public class ActivityInputTeam extends Activity {
             @Override
             public void onClick(View v) {
                 //시간이 되면 입력 양식이 올바른지 검사하는 코드도 만들 것
-                String path = "";
-                String teamname = input_teamname.getText().toString();
-                try {
-                    path = getFilesDir().getPath() + File.separator + "teamname";
-                    File teamname_dir = new File(path);
-                    if (!teamname_dir.exists())
-                        teamname_dir.mkdirs();
-
-                    //Todo : 팀원아이디 입력 부분 파일 저장 파트
-                    Log.e("output_file_path", path + "/" + teamname + ".txt");
-                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path + "/" + teamname + ".txt"));
-                    // output2 = new FileOutputStream(path+"/team3.txt");
-                    for (int i = 0; i < TeamMemberETs.size(); i++) {
-
-                        String member = TeamMemberETs.get(i).getText().toString();
-                        if(member!="") {//시간이 되면 존재하는 아이디인지 검사도 할 것
-                            Log.e("writed id", member);
-                            bufferedWriter.write(member);
-                            bufferedWriter.newLine();
-                        }
-                    }
-                    bufferedWriter.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                Team team = mappingTeam();
+                String teamname = team.team_name;
+                if(ActivityInputTeam.this.formerTeamName!=""){
+                    //formerTeamName이 이전 파일 이름
+                    deleteFile(teamname);
                 }
+
+                if(teamname == ""||team.getMembers().size()==0){
+                    //입력 양식이 올바른지 검사
+                    Toast toast = Toast.makeText(ActivityInputTeam.this, "입력 양식이 틀렸습니다.", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                team.storeTeamFile(ActivityInputTeam.this, new ReadMyName(ActivityInputTeam.this).getMyName());
+
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(ActivityInputTeam.this.getCurrentFocus().getWindowToken(),0);
 

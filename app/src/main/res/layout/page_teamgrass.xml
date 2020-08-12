@@ -18,9 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fadeScrollbars="false"
-        android:orientation="vertical"
-        >
-
+        android:orientation="vertical">
     </androidx.recyclerview.widget.RecyclerView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,7 +28,7 @@
             android:layout_margin="@dimen/fab_margin"
             app:layout_anchor="@id/teamgrass_outer"
             android:layout_gravity="end|bottom"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
+            app:srcCompat="@drawable/btn_add" />
     </FrameLayout>
 
 </LinearLayout>
