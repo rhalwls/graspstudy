@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.example.nav_test.R;
+import com.example.nav_test.ReadMyName;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,6 +26,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 public class Team implements Serializable {
+
     public String team_name;
     public ArrayList<String> members;//멤버 별로 인덱스를 가짐
     public Date startDate;
