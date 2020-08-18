@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.example.nav_test.ui.github_parser_imageURL;
+import com.example.nav_test.ui.home.Team;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
         Log.i("MainActivity","right before searching toolbar");
-
+        Log.i("MainActivity", "check external state : "+Team.isExternalStorageWritable()+" , "+Team.isExternalStorageReadable());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
