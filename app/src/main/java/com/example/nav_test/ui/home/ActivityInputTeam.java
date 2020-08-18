@@ -169,7 +169,8 @@ public class ActivityInputTeam extends Activity {
                 String teamname = team.team_name;
                 if(ActivityInputTeam.this.formerTeamName!=NOT_EXIST){
                     //formerTeamName이 이전 파일 이름
-                    Team.deleteTeamFile(ActivityInputTeam.this, user, formerTeamName);
+                    boolean ret = Team.deleteTeamFile(ActivityInputTeam.this, user, formerTeamName);
+                    Log.i("ActivityInputTeam","trying to remove former team "+formerTeamName+" success ? "+ret);
                 }
 
                 if(teamname == ""||team.getMembers().size()==0){
@@ -216,14 +217,17 @@ public class ActivityInputTeam extends Activity {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public Team mappingTeam(){
+    public Team mappingTeam(){//from ui to team
         String teamname = input_teamname.getText().toString();
         Team team = new Team(teamname);
         Log.i("ActivityInputTeam","Members EditText size : "+TeamMemberETs.size());
         for (int i = 0; i < TeamMemberETs.size(); i++) {//convert team member edittexts and append to LinkedList
             String member = TeamMemberETs.get(i).getText().toString();
-            Log.e("writed id", member);
-            team.members.add(member);
+            if(member!=""){//시간 남으면 유효한 깃헙 아이디인지도 검사하기!
+                Log.e("writed id", member);
+                team.members.add(member);
+            }
+
         }
         Date startDate = getDateFromDatePicker(datePickerStart);
         team.setStartDate(startDate);

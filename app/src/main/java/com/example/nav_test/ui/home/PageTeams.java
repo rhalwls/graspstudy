@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresPermission;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,11 +61,11 @@ public class PageTeams extends Fragment {
 
 
 
-        loadAllFileToFileArray(path);
+        loadAllFileToFileArray();
 
     }
 
-    public void loadAllFileToFileArray(String path){//don't need path
+    public void loadAllFileToFileArray(){//don't need path
         all_file_array = Team.getTeamFileLists(getContext(), new ReadMyName(getContext()).getMyName());
     }
 
@@ -102,25 +103,20 @@ public class PageTeams extends Fragment {
             public void onItemClick(View v, int pos) {
                 Fragment fragment;
 
-                if(pos ==all_file_array.size()-1) {
 
-                }//onclick end
+                Bundle args = new Bundle();
+                String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));
 
+                args.putString("selected_team_name", txt_removed_teamname);
+                Team team = Team.loadTeamFile(mContext,new ReadMyName(mContext).getMyName(),txt_removed_teamname);
 
-                else {
-                    Bundle args = new Bundle();
-                    String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));
+                Intent intent = new Intent(
+                        mContext, // 현재 화면의 제어권자
+                        LoadingTeamGrass.class); // 다음 넘어갈 클래스 지정
 
-                    args.putString("selected_team_name", txt_removed_teamname);
-                    Team team = Team.loadTeamFile(mContext,new ReadMyName(mContext).getMyName(),txt_removed_teamname);
+                intent.putExtra("teamObj",team);
+                startActivity(intent); // 다음 화면으로 넘어간다
 
-                    Intent intent = new Intent(
-                            mContext, // 현재 화면의 제어권자
-                            LoadingTeamGrass.class); // 다음 넘어갈 클래스 지정
-
-                    intent.putExtra("teamObj",team);
-                    startActivity(intent); // 다음 화면으로 넘어간다
-                }
 
             }
         });
@@ -128,6 +124,12 @@ public class PageTeams extends Fragment {
             @Override
             public void onButtonClick(View v, int pos) {
                 //Team.deleteTeamFile()
+                String user = new ReadMyName(mContext).getMyName();
+                Team.deleteTeamFile(mContext,user,all_file_array.get(pos));
+
+                all_file_array.remove(pos);
+                adapter.notifyItemRemoved(pos);
+                adapter.notifyItemRangeChanged(pos,all_file_array.size());
                 /*
                 File file = new File(path+"/"+all_file_array.get(pos));
                 String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));

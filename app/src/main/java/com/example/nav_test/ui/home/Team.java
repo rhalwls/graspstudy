@@ -171,7 +171,10 @@ public class Team implements Serializable {
     public static final boolean deleteTeamFile(Context context,String user, String team_name){
         //errorneous
         String path = genrPath(context,user, team_name);
-        Boolean ret = context.deleteFile(path);
+        Log.i("Team","deleting the path :"+path);
+        File toBeDeletedFile = new File(path);
+
+        Boolean ret = toBeDeletedFile.delete();
         return ret;
     }
 
@@ -197,7 +200,7 @@ public class Team implements Serializable {
         else {
             //log
             for (int i = 0; i < files.length; i++) {
-                Log.i("Team getTeamFileLists", "file number"+i+" : "+files[i]);
+                Log.i("Team getTeamFileLists", "file number"+i+" : "+files[i].split("\\.")[0]);
             }
         }
         return arrayFiles;

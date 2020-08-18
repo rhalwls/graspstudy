@@ -55,6 +55,8 @@ public class TeamRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
+
+
                         if(bListener!=null){
                             bListener.onButtonClick(v,pos);
                         }
@@ -77,20 +79,22 @@ public class TeamRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
     }
-
+    void logList(){
+        for(int i =0;i<mData.size();i++){
+            Log.i("TeamRecyclerView","team list path : "+mData.get(i));
+        }
+    }
     TeamRecyclerView(LinkedList<String> list, Context context){
         mData = list;
+
         mContext=context;
         user = new ReadMyName(context).getMyName();
+        logList();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(position == mData.size()-1){
-            return 2;
-        }
-        else
-            return 0;
+        return 0;
     }
 
 

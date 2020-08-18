@@ -25,8 +25,8 @@ import java.util.concurrent.ExecutionException;
 public class FragTeamgrass extends FragGrass {
     Context mContext;
     String path;
-    String teamName;//???????이게 모람
-    ArrayList<String> memberNames;
+    //String teamName;//???????이게 모람
+    //ArrayList<String> memberNames;
     public Team team;
     public LinkedList<Integer>[] numMemberPerDay;
 
@@ -38,12 +38,10 @@ public class FragTeamgrass extends FragGrass {
     }
     public FragTeamgrass(String myid, Team team){
         super(myid);
-        memberNames=team.members;
-        teamName = team.team_name;
-
+        this.team = team;
 
         Log.i("FragTeamgrass","team name : "+team.team_name+" , "+team.getMembers().get(0));
-        numMemberPerDay = new LinkedList[memberNames.size()];
+        numMemberPerDay = new LinkedList[team.getMembers().size()];
     }
 
     @Override
@@ -91,11 +89,11 @@ public class FragTeamgrass extends FragGrass {
                 int idx = (int) view.getTag(R.string.rect_idx);
                 String resStr = fullDate+"날의 우리 팀 잔디 기록\n";
                 TextView dayDetail = (TextView) getActivity().findViewById(R.id.selectedRectDetail);
-                for (int i = 0; i < memberNames.size(); i++) { // 멤버수대로 돌리고
+                for (int i = 0; i < team.getMembers().size(); i++) { // 멤버수대로 돌리고
                     int numPerDay = numMemberPerDay[i].get(numMemberPerDay[i].size()-1-idx);
                     // 각 멤버의 numPerDAY는 각자 INDEX접근해서 SELECT된 INDEX접근
                     Log.i("individual_teamgrass","idx : "+idx+" 00, allnumperday : "+numPerDay+" all_num_perday size : "+numMemberPerDay[0].size());
-                    resStr += memberNames.get(i)+"님이 심은 잔디는 "+numPerDay+" 개입니다람쥐\n";
+                    resStr += team.getMembers().get(i)+"님이 심은 잔디는 "+numPerDay+" 개입니다람쥐\n";
                 }
                 dayDetail.setText(resStr);
             }
@@ -110,13 +108,13 @@ public class FragTeamgrass extends FragGrass {
         LinkedList<String> colorList = new LinkedList<String>();
         int totalCount = 0;
         for(int i = 0 ; i<numMemberPerDay[0].size() ; i++){ // 한칸마다
-            for(int j = 0 ; j<memberNames.size() ;j++) { // 팀원들의 커밋횟수를 확인
+            for(int j = 0 ; j<team.getMembers().size() ;j++) { // 팀원들의 커밋횟수를 확인
             //멤버수대로 numPerday 접근해서 0이 아니면 팀커밋을 올려준다.
                 if (numMemberPerDay[j].get(i) != 0){
                     totalCount += 1;
                 }
             }
-            float commitNum_devide_memberSize = (float)totalCount/(float)memberNames.size();
+            float commitNum_devide_memberSize = (float)totalCount/(float)team.getMembers().size();
             if(commitNum_devide_memberSize == 0){
                 colorList.add("#ebedf0"); // 회색
             }
@@ -150,9 +148,9 @@ public class FragTeamgrass extends FragGrass {
     }
 
     private void parse_all(){
-        Log.i("mj,individual_teamgrass","name_array.size() is "+ memberNames.size());
+        Log.i("mj,individual_teamgrass","name_array.size() is "+ team.getMembers().size());
 
-        for(int i = 0; i< memberNames.size(); i++){
+        for(int i = 0; i< team.getMembers().size(); i++){
             //각 멤버의 깃허브 프론트 페이지 파싱하기
             //github_parser이용하기 - LoadingActivity에서 사용법 참고
             //일단 저장은 하지 말고 Elements로 해주세요
@@ -161,7 +159,7 @@ public class FragTeamgrass extends FragGrass {
             numMemberPerDay[i] = new LinkedList<Integer>();
 
             Elements team_dates = null; // 각 멤버 파싱용 element(for문 돌리면서 삽입)
-            github_parser team_date_number_parser = new github_parser(memberNames.get(i));
+            github_parser team_date_number_parser = new github_parser(team.getMembers().get(i));
             try{
                 team_dates = team_date_number_parser.execute().get(); // 개개인 파싱시작
                 Log.i("individual_teamgrass", "individual parse working");
@@ -185,7 +183,7 @@ public class FragTeamgrass extends FragGrass {
 
                 numMemberPerDay[i].add(Integer.parseInt(team_url_refined_num_perday));
 
-                Log.i("individual_teamgrass", "parsing"+memberNames.get(i)+ team_url_refined_num_perday);
+                Log.i("individual_teamgrass", "parsing"+team.getMembers().get(i)+ team_url_refined_num_perday);
             } // 팀원 한명의 데이터의 요소 하나씩 linkedlist에 add.
 
         }
