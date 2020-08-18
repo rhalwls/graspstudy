@@ -115,10 +115,12 @@ public class Team implements Serializable {
         this.pictureUri = pictureUri;
     }
     public static final String genrPath(Context context, String user, String team_name){
-        String root = Environment.getExternalStorageDirectory().toString();
-        File teamFile = new File(root + "/username/"+user+"/teamname/"+team_name+".dat");
+        //String root = Environment.getExternalStorageDirectory().toString();
+        File root= context.getCacheDir();
+        //File teamFile = new File(root + "/username/"+user+"/teamname/"+team_name+".dat");
 
         return root + "/username/"+user+"/teamname/"+team_name+".dat";
+        //return root+File.separator+team_name+".dat";
     }
 
     public static final Team loadTeamFile(Context context,String user,String team_name){
@@ -143,11 +145,18 @@ public class Team implements Serializable {
         String path = Team.genrPath(context,user,this.team_name);
         FileOutputStream fos = null;
         try {
-            fos = new FileOutputStream(new File(path));
+            File file =new File(path);
+            /*
+            if(!file.exists()){
+                boolean res= file.mkdirs();
+                Log.i("Team store","file.mkdirs result : "+res);
+            }*/
+            fos = new FileOutputStream(file);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(this);
             os.close();
             fos.close();
+            Log.i("Team","storing a team done");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -164,8 +173,10 @@ public class Team implements Serializable {
     }
 
     public static final String[] getTeamFileLists(Context context,String user){
-        String root = Environment.getExternalStorageDirectory().toString();
+        //String root = Environment.getExternalStorageDirectory().toString();
+        File root= context.getCacheDir();
         String userPath = root+"/username/"+user+"/teamname";
+        //String userPath =root.getPath();
         File serFile = new File(userPath);
         Log.i("Team","reading Team List, mom folder file is "+serFile.getPath());
         if (! serFile.isDirectory()){
@@ -183,7 +194,7 @@ public class Team implements Serializable {
         else {
             //log
             for (int i = 0; i < files.length; i++) {
-                Log.i("Team getTeamFileLists", files[i].split(".")[0]);
+                Log.i("Team getTeamFileLists", "file number"+i+" : "+files[i]);
             }
         }
         return files;

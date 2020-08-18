@@ -109,6 +109,7 @@ public class PageTeams extends Fragment {
                 else {
                     Bundle args = new Bundle();
                     String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));
+
                     args.putString("selected_team_name", txt_removed_teamname);
                     Team team = new Team(txt_removed_teamname);
 
