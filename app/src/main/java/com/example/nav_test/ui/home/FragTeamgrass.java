@@ -27,7 +27,7 @@ public class FragTeamgrass extends FragGrass {
     String path;
     String teamName;//???????이게 모람
     ArrayList<String> memberNames;
-
+    public Team team;
     public LinkedList<Integer>[] numMemberPerDay;
 
     public FragTeamgrass(){
@@ -40,6 +40,9 @@ public class FragTeamgrass extends FragGrass {
         super(myid);
         memberNames=team.members;
         teamName = team.team_name;
+
+
+        Log.i("FragTeamgrass","team name : "+team.team_name+" , "+team.getMembers().get(0));
         numMemberPerDay = new LinkedList[memberNames.size()];
     }
 

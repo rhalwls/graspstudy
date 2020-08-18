@@ -59,6 +59,7 @@ public class TeamActivity extends AppCompatActivity {
         FragmentManager manager = this.getSupportFragmentManager();
         FragmentTransaction trans;
         trans = manager.beginTransaction();
+        Log.i("TeamActivity","team name : "+team.team_name+" , team members : "+team.getMembers().size());
         Fragment it = (Fragment) new FragTeamgrass(team.team_name,team);
         it.setArguments(args);
         trans.add(teamLayout.getId(), it , "fragment_grass");

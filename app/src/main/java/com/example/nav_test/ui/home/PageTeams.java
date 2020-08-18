@@ -112,7 +112,7 @@ public class PageTeams extends Fragment {
                     String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));
 
                     args.putString("selected_team_name", txt_removed_teamname);
-                    Team team = new Team(txt_removed_teamname);
+                    Team team = Team.loadTeamFile(mContext,new ReadMyName(mContext).getMyName(),txt_removed_teamname);
 
                     Intent intent = new Intent(
                             mContext, // 현재 화면의 제어권자

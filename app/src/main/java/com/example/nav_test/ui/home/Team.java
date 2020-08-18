@@ -135,6 +135,7 @@ public class Team implements Serializable {
             Team readTeam = (Team) is.readObject();
             is.close();
             fis.close();
+            Log.i("Team","loading Team name : "+team_name+" loaded team members  : "+readTeam.getMembers().size());
             return readTeam;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

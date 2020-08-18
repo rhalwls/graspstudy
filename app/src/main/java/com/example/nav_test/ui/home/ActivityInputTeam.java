@@ -27,6 +27,8 @@ import android.widget.Toast;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
 import com.example.nav_test.ImageProcessor;
+import com.example.nav_test.LoadingActivity;
+import com.example.nav_test.LoginActivity;
 import com.example.nav_test.R;
 import com.example.nav_test.ReadMyName;
 import com.gun0912.tedpermission.PermissionListener;
@@ -190,7 +192,11 @@ public class ActivityInputTeam extends Activity {
                         imageProcessor.saveBitmapTojpeg(bitmap, teamname);
                     }
 
-                    ActivityInputTeam.this.finish();//이렇게 하지 말고 다시 잔디 다람쥐 보여주는 게 더 맞는듯
+                    //ActivityInputTeam.this.finish();//이렇게 하지 말고 다시 잔디 다람쥐 보여주는 게 더 맞는듯
+
+                    Intent intent=new Intent(ActivityInputTeam.this, LoginActivity.class);
+                    startActivity(intent);
+
                 }
             }
 
