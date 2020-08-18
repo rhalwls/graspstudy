@@ -21,10 +21,11 @@ import com.example.nav_test.ReadMyName;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class TeamRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private ArrayList<String> mData = null;
+    private LinkedList<String> mData = null;
     String user;
     int max;
 
@@ -77,7 +78,7 @@ public class TeamRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     }
 
-    TeamRecyclerView(ArrayList<String> list, Context context){
+    TeamRecyclerView(LinkedList<String> list, Context context){
         mData = list;
         mContext=context;
         user = new ReadMyName(context).getMyName();

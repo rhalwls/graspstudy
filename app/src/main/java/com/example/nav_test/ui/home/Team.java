@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -127,7 +128,8 @@ public class Team implements Serializable {
         String path = Team.genrPath(context,user, team_name);
 
         try {
-            FileInputStream fis = context.openFileInput(path);
+            File file =new File(path);
+            FileInputStream fis = new FileInputStream(file);
             ObjectInputStream is = null;
             is = new ObjectInputStream(fis);
             Team readTeam = (Team) is.readObject();
@@ -172,7 +174,7 @@ public class Team implements Serializable {
         return ret;
     }
 
-    public static final String[] getTeamFileLists(Context context,String user){
+    public static final LinkedList<String> getTeamFileLists(Context context,String user){
         //String root = Environment.getExternalStorageDirectory().toString();
         File root= context.getCacheDir();
         String userPath = root+"/username/"+user+"/teamname";
@@ -187,7 +189,7 @@ public class Team implements Serializable {
         }
 
         String[] files = serFile.list();
-
+        LinkedList<String> arrayFiles= new LinkedList<String>(Arrays.asList(files));
         if(files==null||files.length==0){
             Log.i("Team","팀원리스트가 비어있습니다");
         }
@@ -197,6 +199,6 @@ public class Team implements Serializable {
                 Log.i("Team getTeamFileLists", "file number"+i+" : "+files[i]);
             }
         }
-        return files;
+        return arrayFiles;
     }
 }

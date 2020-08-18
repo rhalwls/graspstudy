@@ -23,13 +23,14 @@ import java.nio.file.Path;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class PageTeams extends Fragment {
 
     Fragment thisfrag = this;
     tabPagerAdapter pagerAdapter;
     String path;
-    ArrayList<String> all_file_array = new ArrayList<>();
+    LinkedList<String> all_file_array = new LinkedList<>();
     Path sharedDirectoryPath;
     WatchKey watchKey;
     WatchService watchService;
@@ -64,7 +65,7 @@ public class PageTeams extends Fragment {
     }
 
     public void loadAllFileToFileArray(String path){//don't need path
-        String[] all_filStrings = Team.getTeamFileLists(getContext(), new ReadMyName(getContext()).getMyName());
+        all_file_array = Team.getTeamFileLists(getContext(), new ReadMyName(getContext()).getMyName());
     }
 
 
