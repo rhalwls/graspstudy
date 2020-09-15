@@ -58,14 +58,29 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="100dp"
                     android:text="멤버들" />
-                <LinearLayout
-                    android:id="@+id/layout_input_team_members"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center">
 
-                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_team_members"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scrollbars="vertical"
+                    android:singleLine="true"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/member_plus_btn"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:background="@drawable/radius"
+                    android:text="인원추가"
+                    android:layout_weight="1"
+                    />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -102,19 +117,10 @@
 
 
                 </Button>
-                <Button
-                    android:id="@+id/member_plus_btn"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:padding="10dp"
-                    android:background="@drawable/radius"
-                    android:text="인원추가"
-                    android:layout_weight="1"
-                    >
 
 
-                </Button>
+
+
                 <Button
                     android:id="@+id/create_btn"
                     android:layout_width="250dp"

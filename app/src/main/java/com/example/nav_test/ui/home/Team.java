@@ -170,11 +170,18 @@ public class Team implements Serializable {
 
     public static final boolean deleteTeamFile(Context context,String user, String team_name){
         //errorneous
+        Log.i("Team","original team name : "+team_name);
+        if(team_name.contains(".")){
+            team_name = team_name.split("\\.")[0];
+            Log.i("Team","team name contains . so reproduction : "+team_name);
+        }
+
         String path = genrPath(context,user, team_name);
         Log.i("Team","deleting the path :"+path);
         File toBeDeletedFile = new File(path);
 
         Boolean ret = toBeDeletedFile.delete();
+        Log.i("Team","deletion result :"+ret);
         return ret;
     }
 
@@ -193,14 +200,17 @@ public class Team implements Serializable {
         }
 
         String[] files = serFile.list();
-        LinkedList<String> arrayFiles= new LinkedList<String>(Arrays.asList(files));
+        LinkedList<String> arrayFiles= new LinkedList<String>();
         if(files==null||files.length==0){
             Log.i("Team","팀원리스트가 비어있습니다");
         }
         else {
             //log
+
             for (int i = 0; i < files.length; i++) {
-                Log.i("Team getTeamFileLists", "file number"+i+" : "+files[i].split("\\.")[0]);
+                String teamname =files[i].split("\\.")[0];
+                Log.i("Team getTeamFileLists", "file number"+i+" : "+teamname);
+                arrayFiles.add(teamname);
             }
         }
         return arrayFiles;

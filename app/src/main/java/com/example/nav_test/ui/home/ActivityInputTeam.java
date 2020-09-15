@@ -5,46 +5,35 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nav_test.AdapterForGithubIDInput;
 import com.example.nav_test.ImageProcessor;
-import com.example.nav_test.LoadingActivity;
 import com.example.nav_test.LoginActivity;
 import com.example.nav_test.R;
 import com.example.nav_test.ReadMyName;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
 
 
 public class ActivityInputTeam extends Activity {
@@ -57,11 +46,13 @@ public class ActivityInputTeam extends Activity {
     File temp_imageFile;
 
     EditText ed = null;
-    List<EditText> TeamMemberETs = new ArrayList<EditText>();
+    //List<EditText> TeamMemberETs = new ArrayList<EditText>();
     LinearLayout outer;
     EditText input_teamname;
-    Button member_plus_button;
-    LinearLayout layoutInputTeamMembers;
+    Button member_plus_button;//remains, needs to control the member adapter
+    ArrayList<String> members = new ArrayList<String>();//give this reference to Adapter
+    RecyclerView recyclerInputTeamMembers;
+    AdapterForGithubIDInput adapterForGithubIDInput;
     Button confirm;
     Button image_add_button;
     ImageView image_added;
@@ -73,15 +64,16 @@ public class ActivityInputTeam extends Activity {
     Activity root = null;
 
     int num_of_text = 1;
-    public EditText addTeamMemberET(String memberName){
-        EditText ed = new EditText(ActivityInputTeam.this);
-        ed.setWidth(50);
-        ed.setHint("팀원 username");
-        ed.setText(memberName);
-        ed.setWidth(200);
-        TeamMemberETs.add(ed);
-        layoutInputTeamMembers.addView(ed);
-        return ed;
+    public void addTeamMemberET(String memberName){//if memberName is null it adds a new member input
+        members.add(memberName);
+        Log.i("ActivityInputTeam","this member size : "+members.size()+" , adapter member size : "+adapterForGithubIDInput.getItemCount());
+
+        adapterForGithubIDInput.notifyDataSetChanged();
+        //일단 임시방편으로 edittext done 때 검사하는 것 말고 추가할 때 넣는 걸로 함
+        for(int i =0;i<members.size();i++){
+            Log.i("ActivityInputTeam","team member added and full mem #"+members.get(i));
+        }
+
     }
     public static Date getDateFromDatePicker(DatePicker datePicker){
         int day = datePicker.getDayOfMonth();
@@ -117,12 +109,17 @@ public class ActivityInputTeam extends Activity {
         image_add_button = root.findViewById(R.id.input_image_button);
         image_added = root.findViewById(R.id.team_edit_imageview);
         datePickerStart =(DatePicker) findViewById(R.id.team_start_date);
-        layoutInputTeamMembers =(LinearLayout) findViewById(R.id.layout_input_team_members);
+        recyclerInputTeamMembers =(RecyclerView) findViewById(R.id.recycler_team_members);
+        adapterForGithubIDInput = new AdapterForGithubIDInput(this.members);
+        Log.i("ActivityInputTeam","adapter team # member :"+adapterForGithubIDInput.getItemCount());
+        recyclerInputTeamMembers.setLayoutManager(new LinearLayoutManager(this));//call this first and set adapter later
+        recyclerInputTeamMembers.setAdapter(adapterForGithubIDInput);
+        /*
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutInputTeamMembers.setLayoutParams(lp);
+        recyclerInputTeamMembers.setLayoutParams(lp);
+        */
 
-
-
+        //set adapter after checking team null
 
         Intent intent = getIntent();
 
@@ -130,8 +127,14 @@ public class ActivityInputTeam extends Activity {
 
         Team team = (Team) intent.getSerializableExtra("teamObj");
         if(team !=null){// 실험
-            mappingUI(team); //edit team
+
             formerTeamName = team.team_name;
+
+            //members에 넣어야댐
+            members.addAll(team.getMembers());
+            adapterForGithubIDInput.notifyDataSetChanged();
+
+            mappingUI(team); //edit team
             //need to erase the former team and store the edited info as a new team(for time saving)
             //erase when the user REALLY WANTS TO UPDATE TEAM INFO
 
@@ -141,10 +144,9 @@ public class ActivityInputTeam extends Activity {
         else{
             //empty team
             //input new team
+            addTeamMemberET("");//empty edit text
             Log.i("ActivityInputTeam","team is null");
         }
-
-        addTeamMemberET("");//empty edit text
 
 
         image_add_button.setOnClickListener(new View.OnClickListener() {
@@ -208,27 +210,26 @@ public class ActivityInputTeam extends Activity {
 
     public void mappingUI(Team team) { // 아마 기존 팀정보 불러오는 것(팀 수정시 사용되는거같음)
         input_teamname.setText(team.team_name);
-        imageProcessor.setTeamImg(team.pictureUri, image_added);
-        ArrayList<String> teamMembers = team.getMembers();
-        for(int i=0;i<team.getMembers().size();i++){
-            addTeamMemberET(teamMembers.get(i));
-        }
+        imageProcessor.setTeamImg(team.pictureUri, image_added);//if new team, need to initialize adapter with empty list
+        //else if existing team, need to init adapter with existing list
         imageProcessor.setTeamImg(team.pictureUri, image_added);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public Team mappingTeam(){//from ui to team
+        //if return is null it fails to generate a team
         String teamname = input_teamname.getText().toString();
         Team team = new Team(teamname);
-        Log.i("ActivityInputTeam","Members EditText size : "+TeamMemberETs.size());
-        for (int i = 0; i < TeamMemberETs.size(); i++) {//convert team member edittexts and append to LinkedList
-            String member = TeamMemberETs.get(i).getText().toString();
-            if(member!=""){//시간 남으면 유효한 깃헙 아이디인지도 검사하기!
-                Log.e("writed id", member);
-                team.members.add(member);
-            }
-
+        ArrayList<String> membersFromAdapter = adapterForGithubIDInput.getRefinedMembers();
+        if(membersFromAdapter !=null) {
+            team.setMembers(membersFromAdapter);
         }
+        else{
+            return null;//fail
+        }
+
+        Log.i("ActivityInputTeam","Members EditText size : "+team.getMembers().size());
+
         Date startDate = getDateFromDatePicker(datePickerStart);
         team.setStartDate(startDate);
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

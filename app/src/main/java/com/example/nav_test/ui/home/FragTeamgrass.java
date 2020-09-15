@@ -15,6 +15,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -100,7 +101,28 @@ public class FragTeamgrass extends FragGrass {
         };
     }
 
+    public String darkerColor(String color){//
+        Log.i("FragTeamgrass","before darken"+color);
+        color = color.split("#")[1];//#을 제외한 컬러코드만 나옴
+        Log.i("FragTeamgrass","color sub 2 3 :"+color.substring(2,4));
+        String rr = color.substring(2,4),gg=color.substring(4,6),bb =color.substring(6,8);
+        int r=Integer.parseInt(rr,16), g=Integer.parseInt(gg,16), b=Integer.parseInt(bb,16);
+        int R,G,B;
 
+
+        // constant factors
+        final double GS_RED   = 0.299;
+        final double GS_GREEN = 0.587;
+        final double GS_BLUE  = 0.114;
+        R = G = B = (int)(GS_RED * r + GS_GREEN * g + GS_BLUE * b);
+        //colorLong-=0x00206020;//hex 001100
+        String colorGray = color.substring(0,2)+String.format("%02x",R)+String.format("%02x",G)+String.format("%02x",B);
+        if(colorGray.equals("ffffffff")){
+            colorGray="eeeeeeee";
+        }
+        Log.i("FragTeamgrass","darkerColor : "+colorGray);
+        return "#"+colorGray;
+    }
     public LinkedList<String> createFrame(/*int commit_num, int max,String date*/) { // 여기서 team_grass의 색 list를 만들자. (파싱 안해옴)
         //색상 변경
         //일단 안 쓰이는 함수인 거 같은데 ...?
@@ -115,27 +137,41 @@ public class FragTeamgrass extends FragGrass {
                 }
             }
             float commitNum_devide_memberSize = (float)totalCount/(float)team.getMembers().size();
+            Context context = getContext();
+            String color = ColorP.fromRToString(context,R.color.colorWhite);
             if(commitNum_devide_memberSize == 0){
-                colorList.add("#ebedf0"); // 회색
+                color= ColorP.fromRToString(context,R.color.colorWhite);
             }
             else if(commitNum_devide_memberSize<0.25){
-                colorList.add("#c6e48b"); // 연녹색
+                color = ColorP.fromRToString(context,R.color.colorFourthDark); // 연녹색
             }
             else if(commitNum_devide_memberSize<0.5){
-                colorList.add("#7bc96f"); // 녹색
+                color = ColorP.fromRToString(context,R.color.colorThirdDark); // 녹색
             }
             else if(commitNum_devide_memberSize<0.75){
-                colorList.add("#239a3b"); // 진녹색
+                color = ColorP.fromRToString(context,R.color.colorSecondDark); // 진녹색
             }
             else if(commitNum_devide_memberSize<=1){
-                colorList.add("#196127"); //찐녹색
+                color = ColorP.fromRToString(context,R.color.colorFirstDark); //찐녹색
             }
             else{
                 Log.e("devide error!", String.valueOf(commitNum_devide_memberSize));
             }
+
+
+            try {
+                Date cur =git_hub_time_formatter.parse(this.all_date.get(i));
+                if(cur.before(team.startDate)&&!cur.equals(team.startDate)){
+                    color= darkerColor(color);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            colorList.add(color);
+
             totalCount = 0;
         }
-        Log.i("individual_teamgrass","done genr color Linked List");
+        Log.i("individual_teamgrass","done genr color Linked List size : "+all_colors.size());
         return colorList; // 팀원잔디색 list 통째로 반환
     }
 

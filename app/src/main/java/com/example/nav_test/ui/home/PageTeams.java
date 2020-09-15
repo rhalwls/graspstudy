@@ -105,10 +105,10 @@ public class PageTeams extends Fragment {
 
 
                 Bundle args = new Bundle();
-                String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));
+                String ext_removed_teamname = all_file_array.get(pos);
 
-                args.putString("selected_team_name", txt_removed_teamname);
-                Team team = Team.loadTeamFile(mContext,new ReadMyName(mContext).getMyName(),txt_removed_teamname);
+                args.putString("selected_team_name", ext_removed_teamname);
+                Team team = Team.loadTeamFile(mContext,new ReadMyName(mContext).getMyName(),ext_removed_teamname);
 
                 Intent intent = new Intent(
                         mContext, // 현재 화면의 제어권자
@@ -130,22 +130,10 @@ public class PageTeams extends Fragment {
                 all_file_array.remove(pos);
                 adapter.notifyItemRemoved(pos);
                 adapter.notifyItemRangeChanged(pos,all_file_array.size());
-                /*
-                File file = new File(path+"/"+all_file_array.get(pos));
-                String txt_removed_teamname = all_file_array.get(pos).substring(0, all_file_array.get(pos).lastIndexOf("."));
-                File imagefile = new File("/data/data/com.example.nav_test/cache/"+txt_removed_teamname+".jpg");
-                if(file.exists()){
-                    imagefile.delete();
-                    file.delete();
-                }
 
-                all_file_array.remove(pos);
-                adapter.notifyItemRemoved(pos);
-                adapter.notifyItemRangeChanged(pos,all_file_array.size());
-                */
+
             }
         }));
-
 
 
         recyclerView.setAdapter(adapter);

@@ -137,7 +137,7 @@ public class TeamRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
             case 0:
                 ViewHolder0 viewHolder0 = (ViewHolder0)holder;
                 String teamname = mData.get(position); //team name 받음
-                String txt_removed_teamname = teamname.substring(0, teamname.lastIndexOf("."));
+                String txt_removed_teamname = teamname;
 
                 viewHolder0.title.setText(txt_removed_teamname);
                 setDetailAsMembers(viewHolder0, txt_removed_teamname);

@@ -113,6 +113,7 @@ public class FragGrass extends Fragment {
     public void addDayUI(int i, int j){//왜 근데 지금 day가 하나씩 차이 나는 잔디모가 있는지 모르겠다
         //아터님의 경우 18일에 5갠데 6개로 나옴
         try {
+            Log.i("FragGrass","all_colors size "+all_colors.size() );
             String color_temp = all_colors.pollLast(); // 링크드리스트에서 마지막요소를 반환하면서 제거.
             String sd = all_date.pollLast(); // selected date
             Date selected_date = git_hub_time_formatter.parse(sd); // yyyy-mm-dd
@@ -126,6 +127,7 @@ public class FragGrass extends Fragment {
             colrow.setTag(R.string.rect_date,sd);//store metadata to buttons // colrow에 R.string.rect_date라는 항목을 만들고 그것의 value는 sd이다.
             colrow.setTag(R.string.rect_idx, ctr);//to access additional data(separate from ui)
             colrow.setOnClickListener(onClickListener);
+            Log.i("FragGrass","color_temp : "+color_temp);
             colrow.setBackgroundColor(Color.parseColor(color_temp));
             colrow.setText(day);
             if(day.equals("01")){
@@ -184,7 +186,7 @@ public class FragGrass extends Fragment {
                 int colrowid = R.id.class.getField("col24row"+(8-j)).getInt(0);//7~8까지 가능해보이는데?
                 Button colrow =(Button)root.findViewById(colrowid);
                 colrow.setText(day);
-                colrow.setBackgroundColor(getResources().getColor(R.color.colorStrongGray));
+                colrow.setBackgroundColor(getResources().getColor(R.color.colorStrongGrayBlue));
                 cal.add(Calendar.DATE,-1);
 
             } catch (IllegalAccessException e) {

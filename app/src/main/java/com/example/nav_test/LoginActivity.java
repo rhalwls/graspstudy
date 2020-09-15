@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends Activity {
     public String user_file = "nofile";
@@ -32,6 +34,22 @@ public class LoginActivity extends Activity {
                 file.delete();
                 FileWriter fw = null ;
                 String text = myname.getText().toString();
+                //check whether a valid github id
+                GithubIDValidator validator = new GithubIDValidator(text);
+                try {
+                    Boolean isValidUsername = validator.execute().get();
+                    if(!isValidUsername){
+                        Log.i("LoginActivity","invalid user: "+text);
+                        Toast toast = Toast.makeText(getApplicationContext(), "아이디 "+text+"는 유효한 깃허브 아이디가 아닙니다. 확인 후 입력해주세요.", Toast.LENGTH_LONG);
+                        toast.show();
+                        return;
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
                 try {
                     // open file.
                     fw = new FileWriter(file) ;

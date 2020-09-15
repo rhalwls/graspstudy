@@ -64,6 +64,7 @@ public class github_parser extends AsyncTask<Void, Void, Elements> {
             }
             catch (Exception e){
                 e.printStackTrace();
+                return null;
             }
             //Log.e("파싱후:","abce");
            // Log.e("파싱한 값 전체:",doc.html());
@@ -83,7 +84,10 @@ public class github_parser extends AsyncTask<Void, Void, Elements> {
     }
 
 
-
+    public Boolean isValidUser(){
+        Elements ret = doInBackground();//일단 파싱 후 존재 여부 확인
+        return ret != null;
+    }
 
 
     //function below hasn't implemented yet
